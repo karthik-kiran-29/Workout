@@ -4,6 +4,23 @@ import { addData } from "./lib/firebase";
 import HeroWomanTop from "./assets/Golden-Yellow-Kanjivaram-Silk-Saree.webp";
 import HeroWomanBottom from "./assets/hero-women-pos.png";
 import OldSilkSarees from "./assets/Money-To-Saree.png";
+
+import sareeImg1 from "./assets/saree_img_1.png";
+import sareeImg2 from "./assets/saree_img_2.png";
+import sareeImg3 from "./assets/saree_img_3.png";
+import sareeImg4 from "./assets/saree_img_4.png";
+import sareeImg5 from "./assets/saree_img_5.png";
+import sareeImg6 from "./assets/saree_img_6.png";
+import sareeImg7 from "./assets/saree_img_7.png";
+import sareeImg8 from "./assets/saree_img_8.png";
+import sareeImg9 from "./assets/saree_img_9.png";
+import sareeImg10 from "./assets/saree_img_10.png";
+import sareeImg11 from "./assets/saree_img_11.png";
+import sareeImg12 from "./assets/saree_img_12.png";
+import sareeImg13 from "./assets/saree_img_13.png";
+import sareeImg14 from "./assets/saree_img_14.png";
+import sareeImg15 from "./assets/saree_img_15.png";
+import sareeImg16 from "./assets/saree_img_16.png";
 /* ─────────────────────────────────────────────
    GLOBAL CSS  (injected once via <style> tag)
 ───────────────────────────────────────────── */
@@ -825,22 +842,22 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 
 /* ── DATA ── */
 const allProducts = [
-  { imgUrl: "./src/assets/saree_img_1.png",  name: "Pattu Vethai",              desc: "Traditional Pattu Vethai sarees bought at best market rates." },
-  { imgUrl: "./src/assets/saree_img_2.png",  name: "Pattu Sattai",              desc: "Authentic Pattu Sattai evaluated by silk experts." },
-  { imgUrl: "./src/assets/saree_img_3.png",  name: "Pattu Thundu",              desc: "Fine Pattu Thundu pieces accepted in any condition." },
-  { imgUrl: "./src/assets/saree_img_4.png",  name: "Pattu Salai",               desc: "Premium Pattu Salai weaves — instant cash offered." },
-  { imgUrl: "./src/assets/saree_img_5.png",  name: "Pattu Pavadai",             desc: "Silk Pattu Pavadai and dresses purchased at fair value." },
-  { imgUrl: "./src/assets/saree_img_6.png",  name: "Banarasi Silk",             desc: "Exquisite Banarasi weaves in any condition accepted." },
-  { imgUrl: "./src/assets/saree_img_7.png",  name: "Mysore Silk",               desc: "Soft Mysore silk sarees purchased with fair valuation." },
-  { imgUrl: "./src/assets/saree_img_8.png",  name: "Tissue Silk Sarees",        desc: "Delicate tissue sarees evaluated with expert care." },
-  { imgUrl: "./src/assets/saree_img_9.png",  name: "Jacquard Silk Saree",       desc: "Intricate Jacquard silk designs — top prices paid." },
-  { imgUrl: "./src/assets/saree_img_10.png", name: "Tanki / Jangla Silk Saree", desc: "Traditional Tanki and Jangla weaves expertly valued." },
-  { imgUrl: "./src/assets/saree_img_11.png", name: "Padiyur Silk Sarees",       desc: "Authentic Padiyur silk sarees bought instantly." },
-  { imgUrl: "./src/assets/saree_img_12.png", name: "Kanchipuram Pattu Saree",   desc: "Premium Kanchipuram silk with authentic zari work." },
-  { imgUrl: "./src/assets/saree_img_13.png", name: "Jangala Banarasi Sarees",   desc: "Heritage Jangala Banarasi — we buy all types." },
-  { imgUrl: "./src/assets/saree_img_14.png", name: "Thirli Onam Silk Sarees",   desc: "Festive Onam silk sarees accepted at premium rates." },
-  { imgUrl: "./src/assets/saree_img_15.png", name: "Kavaring Silk Sarees",      desc: "Beautiful Kavaring silk sarees evaluated fairly." },
-  { imgUrl: "./src/assets/saree_img_16.png", name: "Mixed Jatiqui Silk Sarees", desc: "Mixed Jatiqui silk varieties — all types accepted." },
+  { imgUrl: sareeImg1,  name: "Pattu Vethai",              desc: "Traditional Pattu Vethai sarees bought at best market rates." },
+  { imgUrl: sareeImg2,  name: "Pattu Sattai",              desc: "Authentic Pattu Sattai evaluated by silk experts." },
+  { imgUrl: sareeImg3,  name: "Pattu Thundu",              desc: "Fine Pattu Thundu pieces accepted in any condition." },
+  { imgUrl: sareeImg4,  name: "Pattu Salai",               desc: "Premium Pattu Salai weaves — instant cash offered." },
+  { imgUrl: sareeImg5,  name: "Pattu Pavadai",             desc: "Silk Pattu Pavadai and dresses purchased at fair value." },
+  { imgUrl: sareeImg6,  name: "Banarasi Silk",             desc: "Exquisite Banarasi weaves in any condition accepted." },
+  { imgUrl: sareeImg7,  name: "Mysore Silk",               desc: "Soft Mysore silk sarees purchased with fair valuation." },
+  { imgUrl: sareeImg8,  name: "Tissue Silk Sarees",        desc: "Delicate tissue sarees evaluated with expert care." },
+  { imgUrl: sareeImg9,  name: "Jacquard Silk Saree",       desc: "Intricate Jacquard silk designs — top prices paid." },
+  { imgUrl: sareeImg10, name: "Tanki / Jangla Silk Saree", desc: "Traditional Tanki and Jangla weaves expertly valued." },
+  { imgUrl: sareeImg11, name: "Padiyur Silk Sarees",       desc: "Authentic Padiyur silk sarees bought instantly." },
+  { imgUrl: sareeImg12, name: "Kanchipuram Pattu Saree",   desc: "Premium Kanchipuram silk with authentic zari work." },
+  { imgUrl: sareeImg13, name: "Jangala Banarasi Sarees",   desc: "Heritage Jangala Banarasi — we buy all types." },
+  { imgUrl: sareeImg14, name: "Thirli Onam Silk Sarees",   desc: "Festive Onam silk sarees accepted at premium rates." },
+  { imgUrl: sareeImg15, name: "Kavaring Silk Sarees",      desc: "Beautiful Kavaring silk sarees evaluated fairly." },
+  { imgUrl: sareeImg16, name: "Mixed Jatiqui Silk Sarees", desc: "Mixed Jatiqui silk varieties — all types accepted." },
 ];
 
 const INITIAL_SHOW = 6;
