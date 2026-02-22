@@ -416,8 +416,24 @@ img { border-radius: 16px; }
 .branches-section { background: var(--deep); }
 .branches-section .section-title { color: #fff; }
 .branches-grid { max-width: 1200px; margin: 50px auto 0; display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; }
-.branches-two-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-@media (max-width: 768px) { .branches-two-grid { grid-template-columns: 1fr; gap: 20px; } }
+.branches-two-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 0 8px;
+}
+
+@media (max-width: 900px) {
+  .branches-two-grid { gap: 20px; }
+}
+
+@media (max-width: 768px) {
+  .branches-two-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0;
+  }
+}
 .branch-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(200,146,42,0.3);
@@ -514,13 +530,31 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 .social-link:hover { background: var(--gold); color: #fff; transform: rotateY(360deg) scale(1.1); }
 
 /* ── FLOATING BUTTONS ── */
-.float-btns { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 12px; z-index: 999; }
-.float-btn { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform .3s, box-shadow .3s; animation: floatPulse 3s ease infinite; }
+.float-btns {
+  position: fixed; bottom: 24px; right: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  z-index: 999;
+  max-width: calc(100vw - 32px);
+}
+.float-btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  transition: transform .3s, box-shadow .3s;
+  animation: floatPulse 3s ease infinite;
+  flex-shrink: 0;
+}
 .float-btn:nth-child(2) { animation-delay: 1.5s; }
 @keyframes floatPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
-.float-btn:hover { transform: scale(1.2) rotate(10deg) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.float-btn:hover { transform: scale(1.18) rotate(8deg) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .float-wa { background: #25d366; color: #fff; }
 .float-call { background: var(--gold); color: #fff; }
+
+@media (max-width: 480px) {
+  .float-btns { bottom: 16px; right: 12px; gap: 10px; }
+  .float-btn { width: 46px; height: 46px; font-size: 18px; }
+}
 .float-gift {
   background: linear-gradient(135deg, #c8922a, #a0501a);
   color: #fff; position: relative; overflow: hidden;
@@ -750,6 +784,42 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 
   .promise-cta-box .btn-primary,
   .promise-cta-box .btn-outline { font-size: 15px; padding: 14px; }
+}
+
+/* ── EXCHANGE RATE GRID ── */
+.exchange-rate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .exchange-rate-grid { gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .exchange-rate-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .exchange-rate-grid .reveal-right {
+    order: -1;
+  }
+  .exchange-rate-grid .reveal-right img {
+    max-height: 260px;
+    object-fit: cover;
+    width: 100%;
+  }
+  .exchange-rate-grid .reveal-right > div[style] {
+    bottom: -12px !important;
+    left: 10px !important;
+    padding: 14px 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .exchange-rate-grid .reveal-right img { max-height: 200px; }
 }
 `;
 
@@ -1584,15 +1654,7 @@ export default function App() {
           overflow: "hidden",
         }}
       >
-        <div
-          className="max-w"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 60,
-            alignItems: "center",
-          }}
-        >
+        <div className="max-w exchange-rate-grid">
           <div className="reveal-left">
             <div className="section-label" style={{ color: "var(--gold)" }}>
               Saree Valuation
@@ -1733,7 +1795,6 @@ export default function App() {
             </div>
           </div>
         </div>
-        <style>{`@media(max-width:768px){.exchange-grid{grid-template-columns:1fr!important}}`}</style>
       </section>
 
       {/* ─── PRODUCTS ─── */}
@@ -1808,16 +1869,7 @@ export default function App() {
                 className="branch-card-full reveal"
                 style={{ transitionDelay: `${i * 0.15}s` }}
               >
-                <div
-                  style={{
-                    borderTop: `4px solid ${b.color}`,
-                    background: "rgba(255,255,255,0.05)",
-                    borderRadius: 12,
-                    padding: "32px 28px",
-                    border: "1px solid rgba(200,146,42,0.25)",
-                    backdropFilter: "blur(4px)",
-                  }}
-                >
+                <div style={{borderTop:`4px solid ${b.color}`,background:'rgba(255,255,255,0.05)',borderRadius:12,padding:'clamp(20px, 4vw, 32px) clamp(16px, 3vw, 28px)',border:'1px solid rgba(200,146,42,0.25)',backdropFilter:'blur(4px)'}}>
                   <div style={{ fontSize: 36, marginBottom: 12 }}>🏪</div>
                   <h3
                     style={{
@@ -1858,9 +1910,7 @@ export default function App() {
                   >
                     <iframe
                       src={b.mapEmbed}
-                      width="100%"
-                      height="200"
-                      style={{ border: 0, display: "block" }}
+                      width="100%" height="220" style={{border:0,display:'block',minHeight:180}}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
