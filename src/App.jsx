@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import pattusaree from "./assets/Pattusaree.jpg";
 import { addData } from "./lib/firebase";
 
+import HeroWoman from './assets/hero-women-pos.png';
+import OldSilkSarees from './assets/Types_old_Silk_sarees.jpg'
 /* ─────────────────────────────────────────────
    GLOBAL CSS  (injected once via <style> tag)
 ───────────────────────────────────────────── */
@@ -30,40 +32,32 @@ body {
 /* ── MARQUEE ── */
 .marquee-wrap { background: var(--gold); overflow: hidden; padding: 8px 0; }
 .marquee-track {
-  display: flex; gap: 60px;
-  animation: marquee 22s linear infinite;
+  display: flex; gap: 80px;
+  animation: marquee 50s linear infinite;
   white-space: nowrap; width: max-content;
 }
 .marquee-track span {
-  font-size: 12px; font-weight: 600; color: #fff;
+  font-size: 16px; font-weight: 600; color: #fff;
   letter-spacing: 2px; text-transform: uppercase;
 }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* ── TOPBAR ── */
-.topbar {
-  background: var(--deep); color: #ccc; font-size: 13px;
-  padding: 8px 40px; display: flex; gap: 40px; align-items: center;
-  flex-wrap: wrap;
-}
-.topbar a { color: var(--gold); text-decoration: none; }
 
 /* ── NAV ── */
 nav {
   position: sticky; top: 0; z-index: 200;
   background: rgba(255,255,255,0.96);
   border-bottom: 2px solid var(--gold);
-  padding: 0 40px; display: flex; align-items: center;
+  padding: 20px 40px; display: flex; align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 30px rgba(0,0,0,0.1);
   backdrop-filter: blur(10px);
 }
-.logo-area h1 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--deep); line-height: 1.1; }
+.logo-area h1 { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--deep); line-height: 1.1; }
 .logo-area p { font-size: 12px; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
 .nav-links { display: flex; list-style: none; }
 .nav-links li { position: relative; }
 .nav-links a {
-  display: block; padding: 22px 18px; font-size: 15px;
+  display: block; padding: 22px 18px; font-size: 22px;
   font-weight: 600; color: var(--deep); text-decoration: none;
   transition: color .2s; letter-spacing: .5px;
 }
@@ -79,7 +73,7 @@ nav {
 .dropdown a:hover { background: #fdf6ec; color: var(--gold); }
 .nav-cta {
   background: var(--gold); color: #fff !important;
-  padding: 10px 22px !important; border-radius: 2px; font-size: 14px !important;
+  padding: 22px 22px !important; border-radius: 2px; font-size: 22px !important;
   transition: background .2s, transform .2s !important;
 }
 .nav-cta:hover { background: var(--dark-gold) !important; transform: translateY(-2px) !important; }
@@ -597,7 +591,7 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
   /* Buy / Flip cards */
   .buy-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .flip-card { height: 220px; }
-  .flip-front .emoji { font-size: 48px; margin-bottom: 10px; }
+  .flip-front .emoji { font-size: 48px; margin-bottom: 10px; background-image: url("./src/assets/Types_old_Silk_sarees.jpg");}
   .flip-front h3 { font-size: 13px; }
   .flip-back h3 { font-size: 15px; }
   .flip-back p { font-size: 13px; }
@@ -921,20 +915,6 @@ export default function App() {
       {/* MOBILE NAV */}
       <MobileNav open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
 
-      {/* MARQUEE */}
-      <div className="marquee-wrap">
-        <div className="marquee-track">
-          {Array(12).fill("✦ Old Silk Saree Buyers ✦ Best Price Guaranteed ✦ Instant Cash ✦ Doorstep Service ✦ 20+ Years Experience").map((t, i) => <span key={i}>{t}</span>)}
-        </div>
-      </div>
-
-      {/* TOPBAR */}
-      <div className="topbar">
-        <span>📞 <a href="tel:+917010506200">+9170105 06200</a></span>
-        <span>✉️ <a href="mailto:lakshmipattucbe@gmail.com">lakshmipattucbe@gmail.com</a></span>
-        <span>📍 Pothys, Cross Cut Rd, Erode – 641012</span>
-      </div>
-
       {/* NAV */}
       <nav>
         <div className="logo-area">
@@ -982,19 +962,10 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── FEATURES STRIP ─── */}
-      <div className="features-strip">
-        <div className="features-grid">
-          {[
-            { icon: "🛒", title: "All Silk Types Accepted", desc: "We buy all silk sarees in any condition — old, used, or damaged." },
-            { icon: "💰", title: "Best Price Offered", desc: "Fair value with full trust and transparent service guaranteed." },
-            { icon: "📞", title: "Guided Customer Service", desc: "Call us and we'll guide you through the selling process smoothly." },
-          ].map((f, i) => (
-            <div key={i} className="feature-item reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
-              <div className="feature-icon">{f.icon}</div>
-              <div><h3>{f.title}</h3><p>{f.desc}</p></div>
-            </div>
-          ))}
+      {/* MARQUEE */}
+      <div className="marquee-wrap">
+        <div className="marquee-track">
+          {Array(12).fill("✦ Old Silk Saree Buyers ✦ Best Price Guaranteed ✦ Instant Cash ✦ Doorstep Service ✦ 20+ Years Experience").map((t, i) => <span key={i}>{t}</span>)}
         </div>
       </div>
 
@@ -1002,7 +973,9 @@ export default function App() {
       <section id="about" style={{ background: "#fff" }}>
         <div className="about-grid">
           <div className="about-img-wrap reveal-left">
-            <div className="about-img-3d">🥻</div>
+            <div>
+              <img src={HeroWoman} className="about-img-3d" placeholder="Woman with Smile and saree"/>
+            </div>
             <div className="about-badge"><div className="num">20+</div><div className="lbl">Years Experience</div></div>
           </div>
           <div className="reveal-right">
@@ -1026,6 +999,43 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── PROCESS ─── */}
+      <section className="process-section">
+        <div className="max-w">
+          <div className="reveal" style={{ textAlign: "center" }}>
+            <div className="section-label" style={{ color: "var(--gold)" }}>How It Works</div>
+            <h2 className="section-title">Our Simple <em>Buying Process</em></h2>
+          </div>
+          <div className="process-grid">
+            {steps.map((s, i) => (
+              <div key={i} className="process-step reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
+                <div className="step-num">{s.icon}</div>
+                <div className="step-label">Step {s.num}</div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── COUNTER STRIP ─── */}
+      <div className="stats-strip">
+        <div className="stats-grid">
+          {[
+            { t: 20, s: "+", l: "Years Experience" },
+            { t: 50, s: "K+", l: "Sarees Bought" },
+            { t: 5, s: "", l: "Branch Locations" },
+            { t: 3223, s: "+", l: "Happy Customers" },
+          ].map((s, i) => (
+            <div key={i} className="reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
+              <Counter target={s.t} suffix={s.s} />
+              <div className="counter-lbl">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ─── WHAT WE BUY ─── */}
       <section className="buy-section">
         <div className="max-w">
@@ -1035,7 +1045,7 @@ export default function App() {
           </div>
           <div className="buy-grid">
             {[
-              { emoji: "🥻", title: "Old Silk Sarees", desc: "All varieties of old silk sarees purchased at premium rates." },
+              {title: "Old Silk Sarees", desc: "All varieties of old silk sarees purchased at premium rates." },
               { emoji: "✨", title: "Old Pattu Sarees", desc: "Traditional pattu sarees evaluated by silk experts." },
               { emoji: "👘", title: "Pattu Pavadai", desc: "Silk skirts and blouses accepted in any condition." },
               { emoji: "🪡", title: "Silk Fabric Pieces", desc: "Silk saree dresses and fabric pieces also purchased." },
@@ -1043,7 +1053,6 @@ export default function App() {
               <div key={i} className="flip-card reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
                 <div className="flip-inner">
                   <div className="flip-front">
-                    <div className="emoji">{card.emoji}</div>
                     <h3>{card.title}</h3>
                   </div>
                   <div className="flip-back">
@@ -1105,43 +1114,6 @@ export default function App() {
           </div>
         </div>
       </section>
-
-      {/* ─── PROCESS ─── */}
-      <section className="process-section">
-        <div className="max-w">
-          <div className="reveal" style={{ textAlign: "center" }}>
-            <div className="section-label" style={{ color: "var(--gold)" }}>How It Works</div>
-            <h2 className="section-title">Our Simple <em>Buying Process</em></h2>
-          </div>
-          <div className="process-grid">
-            {steps.map((s, i) => (
-              <div key={i} className="process-step reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
-                <div className="step-num">{s.icon}</div>
-                <div className="step-label">Step {s.num}</div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── COUNTER STRIP ─── */}
-      <div className="stats-strip">
-        <div className="stats-grid">
-          {[
-            { t: 20, s: "+", l: "Years Experience" },
-            { t: 50, s: "K+", l: "Sarees Bought" },
-            { t: 5, s: "", l: "Branch Locations" },
-            { t: 3223, s: "+", l: "Happy Customers" },
-          ].map((s, i) => (
-            <div key={i} className="reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
-              <Counter target={s.t} suffix={s.s} />
-              <div className="counter-lbl">{s.l}</div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* ─── TESTIMONIALS ─── */}
       <section className="testimonials">
