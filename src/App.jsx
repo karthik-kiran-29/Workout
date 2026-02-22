@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import pattusaree from "./assets/Pattusaree.jpg";
 import { addData } from "./lib/firebase";
 
-import HeroWoman from './assets/hero-women-pos.png';
-import OldSilkSarees from './assets/Types_old_Silk_sarees.jpg'
+import HeroWoman from "./assets/hero-women-pos.png";
+import OldSilkSarees from "./assets/Types_old_Silk_sarees.jpg";
 /* ─────────────────────────────────────────────
    GLOBAL CSS  (injected once via <style> tag)
 ───────────────────────────────────────────── */
@@ -79,14 +79,7 @@ nav {
 .nav-cta:hover { background: var(--dark-gold) !important; transform: translateY(-2px) !important; }
 
 /* ── HAMBURGER ── */
-.hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 8px;
-}
-.hamburger span { display: block; width: 25px; height: 2px; background: var(--deep); border-radius: 2px; transition: all .3s; }
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hamburger { display: none !important; }
 
 /* Mobile Nav Drawer */
 .mobile-nav {
@@ -115,12 +108,32 @@ nav {
   text-decoration: none; letter-spacing: 1px;
 }
 
-/* ── HERO ── */
 .hero {
   min-height: 92vh;
   position: relative; display: flex; align-items: center; overflow: hidden;
   background: #0d0400;
 }
+.hero-img-right {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 45%; height: 100%; z-index: 1;
+  overflow: hidden;
+}
+.hero-img-right img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  border-radius: 0; opacity: 0.85;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 20%, black 60%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 20%, black 60%);
+}
+@media (max-width: 768px) {
+  .hero-img-right {
+    position: relative; width: 100%; height: 260px;
+    order: -1; top: auto; right: auto; bottom: auto;
+  }
+  .hero-img-right img { mask-image: linear-gradient(to bottom, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
+  .hero { flex-direction: column; min-height: 100svh; }
+  .hero-content { z-index: 2; }
+}
+
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-content {
   position: relative; z-index: 2; max-width: 700px;
@@ -196,12 +209,24 @@ section { padding: 90px 40px; }
 .max-w { max-width: 1200px; margin: 0 auto; }
 
 /* ── SCROLL REVEAL ── */
-.reveal { opacity: 0; transform: translateY(50px) rotateX(8deg); transform-origin: top center; transition: opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0) rotateX(0deg); }
-.reveal-left { opacity: 0; transform: translateX(-60px) rotateY(12deg); transform-origin: right center; transition: opacity .7s ease, transform .7s ease; }
-.reveal-left.visible { opacity: 1; transform: translateX(0) rotateY(0deg); }
-.reveal-right { opacity: 0; transform: translateX(60px) rotateY(-12deg); transform-origin: left center; transition: opacity .7s ease, transform .7s ease; }
-.reveal-right.visible { opacity: 1; transform: translateX(0) rotateY(0deg); }
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .85s cubic-bezier(.25,.8,.25,1), transform .85s cubic-bezier(.25,.8,.25,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-48px); transition: opacity .85s cubic-bezier(.25,.8,.25,1), transform .85s cubic-bezier(.25,.8,.25,1); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(48px); transition: opacity .85s cubic-bezier(.25,.8,.25,1), transform .85s cubic-bezier(.25,.8,.25,1); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+img { border-radius: 16px; }
+.about-img-3d img { border-radius: 16px; }
+.product-card-img img { border-radius: 12px 12px 0 0; }
+.about-img-3d { border-radius: 16px; overflow: hidden; }
+.product-card { border-radius: 12px; }
+.product-card-img { border-radius: 12px 12px 0 0; overflow: hidden; }
+.product-card-body { border-radius: 0 0 12px 12px; }
+.flip-front, .flip-back { border-radius: 12px; }
+.why-card { border-radius: 12px; }
+.testimonial-card { border-radius: 12px; }
+.branch-card { border-radius: 12px; }
 
 /* ── FEATURES STRIP ── */
 .features-strip { background: var(--deep); padding: 50px 40px; }
@@ -391,6 +416,8 @@ section { padding: 90px 40px; }
 .branches-section { background: var(--deep); }
 .branches-section .section-title { color: #fff; }
 .branches-grid { max-width: 1200px; margin: 50px auto 0; display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; }
+.branches-two-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 768px) { .branches-two-grid { grid-template-columns: 1fr; gap: 20px; } }
 .branch-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(200,146,42,0.3);
@@ -494,14 +521,53 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 .float-btn:hover { transform: scale(1.2) rotate(10deg) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 .float-wa { background: #25d366; color: #fff; }
 .float-call { background: var(--gold); color: #fff; }
+.float-gift {
+  background: linear-gradient(135deg, #c8922a, #a0501a);
+  color: #fff; position: relative; overflow: hidden;
+  animation: giftBounce 2s ease infinite !important;
+}
+@keyframes giftBounce {
+  0%,100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.15) rotate(-8deg); }
+  50% { transform: scale(1.2) rotate(0deg); }
+  75% { transform: scale(1.15) rotate(8deg); }
+}
+.gift-ripple {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.6);
+  animation: rippleOut 1.8s ease-out infinite;
+}
+@keyframes rippleOut {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
 
+.popup-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  z-index: 9999; display: flex; align-items: center; justify-content: center;
+  animation: fadeInOverlay .3s ease;
+}
+@keyframes fadeInOverlay { from{opacity:0} to{opacity:1} }
+.popup-box {
+  background: #fff; border-radius: 20px; padding: 50px 40px; text-align: center;
+  max-width: 420px; width: 90%; position: relative;
+  animation: popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+}
+@keyframes popIn { from{opacity:0;transform:scale(.7)} to{opacity:1;transform:scale(1)} }
+.popup-icon { font-size: 72px; margin-bottom: 16px; animation: bounceIn .6s .2s cubic-bezier(.175,.885,.32,1.275) both; display: block; }
+@keyframes bounceIn { from{transform:scale(0) rotate(-20deg)} to{transform:scale(1) rotate(0deg)} }
+.popup-box h3 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--deep); margin-bottom: 10px; }
+.popup-box p { font-size: 16px; color: #6a5540; line-height: 1.6; margin-bottom: 28px; }
+.popup-close { background: var(--gold); color: #fff; border: none; padding: 14px 36px; font-size: 16px; font-family: 'Crimson Pro', serif; cursor: pointer; border-radius: 6px; font-weight: 600; transition: background .2s; }
+.popup-close:hover { background: var(--dark-gold); }
 /* ════════════════════════════════════════════
    RESPONSIVE — TABLET (≤ 1024px)
 ════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  nav { padding: 0 24px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
+  nav { padding: 0 16px; flex-wrap: wrap; gap: 8px; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 0; }
+  .hamburger { display: none !important; }
 
   .topbar { padding: 8px 24px; gap: 20px; font-size: 12px; }
 
@@ -548,9 +614,12 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
   .topbar { padding: 8px 16px; gap: 10px; flex-direction: column; align-items: flex-start; font-size: 12px; }
 
   /* Nav */
-  nav { padding: 0 16px; }
-  .logo-area h1 { font-size: 17px; }
-  .logo-area p { font-size: 10px; letter-spacing: 1px; }
+  nav { padding: 8px 10px; flex-wrap: wrap; gap: 6px; }
+  .logo-area h1 { font-size: 14px; }
+  .logo-area p { font-size: 9px; letter-spacing: 1px; }
+  .nav-links { display: flex !important; flex-wrap: wrap; gap: 0; }
+  .nav-links a { padding: 10px 8px; font-size: 13px; }
+  .nav-cta { padding: 10px 10px !important; font-size: 13px !important; }
 
   /* Hero */
   .hero { min-height: 100svh; align-items: flex-end; }
@@ -686,45 +755,173 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 
 /* ── DATA ── */
 const products = [
-  { emoji: pattusaree, isImg: true, name: "Old Kanchipuram Silk Sarees", desc: "Premium Kanchipuram silk with authentic zari work." },
-  { emoji: "🧵", name: "Old Banarasi Silk Sarees", desc: "Exquisite Banarasi weaves in any condition accepted." },
-  { emoji: "✨", name: "Old Tissue Sarees", desc: "Delicate tissue sarees evaluated with expert care." },
-  { emoji: "🌺", name: "Old Thirubuvanam Sarees", desc: "Traditional Thirubuvanam silk — best prices paid." },
-  { emoji: "🏛️", name: "Old Mysore Sarees", desc: "Soft Mysore silk purchased with fair valuation." },
-  { emoji: "🌸", name: "Old Arani Sarees", desc: "Authentic Arani silk sarees bought instantly." },
-  { emoji: "🎋", name: "Old Dharmapuram Sarees", desc: "Heritage Dharmapuram weaves — we buy all types." },
-  { emoji: "💎", name: "Old Silk Sarees", desc: "Any old silk saree accepted at best market value." },
-  { emoji: "👘", name: "Old Pattu Pudavai", desc: "Pattu pudavai and pavadai — full fair cash offered." },
+  {
+    emoji: pattusaree,
+    isImg: true,
+    name: "Old Kanchipuram Silk Sarees",
+    desc: "Premium Kanchipuram silk with authentic zari work.",
+  },
+  {
+    emoji: "🧵",
+    name: "Old Banarasi Silk Sarees",
+    desc: "Exquisite Banarasi weaves in any condition accepted.",
+  },
+  {
+    emoji: "✨",
+    name: "Old Tissue Sarees",
+    desc: "Delicate tissue sarees evaluated with expert care.",
+  },
+  {
+    emoji: "🌺",
+    name: "Old Thirubuvanam Sarees",
+    desc: "Traditional Thirubuvanam silk — best prices paid.",
+  },
+  {
+    emoji: "🏛️",
+    name: "Old Mysore Sarees",
+    desc: "Soft Mysore silk purchased with fair valuation.",
+  },
+  {
+    emoji: "🌸",
+    name: "Old Arani Sarees",
+    desc: "Authentic Arani silk sarees bought instantly.",
+  },
+  {
+    emoji: "🎋",
+    name: "Old Dharmapuram Sarees",
+    desc: "Heritage Dharmapuram weaves — we buy all types.",
+  },
+  {
+    emoji: "💎",
+    name: "Old Silk Sarees",
+    desc: "Any old silk saree accepted at best market value.",
+  },
+  {
+    emoji: "👘",
+    name: "Old Pattu Pudavai",
+    desc: "Pattu pudavai and pavadai — full fair cash offered.",
+  },
 ];
 
 const whyUs = [
-  { icon: "💰", title: "Instant Cash", desc: "Get paid immediately for your old sarees — no waiting, no delays." },
-  { icon: "📊", title: "Best Market Value", desc: "We offer genuine rates based on today's silk market value." },
-  { icon: "🤝", title: "Trusted Evaluation", desc: "Transparent process with no hidden costs or surprises." },
-  { icon: "🏠", title: "Doorstep Service", desc: "Home visits available for bulk and premium sarees." },
-  { icon: "⭐", title: "20+ Years Experience", desc: "Decades of expertise in evaluating authentic silk sarees." },
-  { icon: "✅", title: "ISO Certified", desc: "Professional and certified operations you can fully trust." },
+  {
+    icon: "💰",
+    title: "Instant Cash",
+    desc: "Get paid immediately for your old sarees — no waiting, no delays.",
+  },
+  {
+    icon: "📊",
+    title: "Best Market Value",
+    desc: "We offer genuine rates based on today's silk market value.",
+  },
+  {
+    icon: "🤝",
+    title: "Trusted Evaluation",
+    desc: "Transparent process with no hidden costs or surprises.",
+  },
+  {
+    icon: "🏠",
+    title: "Doorstep Service",
+    desc: "Home visits available for bulk and premium sarees.",
+  },
+  {
+    icon: "⭐",
+    title: "20+ Years Experience",
+    desc: "Decades of expertise in evaluating authentic silk sarees.",
+  },
+  {
+    icon: "✅",
+    title: "ISO Certified",
+    desc: "Professional and certified operations you can fully trust.",
+  },
 ];
 
 const steps = [
-  { num: "01", icon: "📞", title: "Contact Us", desc: "Call or WhatsApp to schedule. Share your address directly." },
-  { num: "02", icon: "🚗", title: "Arrival for Pickup", desc: "Our executive arrives at your location within 12 hours." },
-  { num: "03", icon: "🔬", title: "Testing Silk Quality", desc: "We test silk quality through proven methods." },
-  { num: "04", icon: "💵", title: "On Spot Cash", desc: "After validation, cash is given without any delays." },
+  {
+    num: "01",
+    icon: "📞",
+    title: "Contact Us",
+    desc: "Call or WhatsApp to schedule. Share your address directly.",
+  },
+  {
+    num: "02",
+    icon: "🚗",
+    title: "Arrival for Pickup",
+    desc: "Our executive arrives at your location within 12 hours.",
+  },
+  {
+    num: "03",
+    icon: "🔬",
+    title: "Testing Silk Quality",
+    desc: "We test silk quality through proven methods.",
+  },
+  {
+    num: "04",
+    icon: "💵",
+    title: "On Spot Cash",
+    desc: "After validation, cash is given without any delays.",
+  },
 ];
 
 const testimonials = [
-  { name: "Nathish Raja", text: "Excellent service! They gave me the best price for my old Kanchipuram sarees. The process was transparent and payment was instant.", rating: 5 },
-  { name: "Ramkumar", text: "Very professional team. They came home and evaluated my mother's old silk sarees respectfully. Highly recommend!", rating: 5 },
-  { name: "Priya Lakshmi", text: "Trusted and reliable buyers. Got a fair price for my grandmother's collection. The staff was courteous and prompt.", rating: 5 },
+  {
+    name: "Nathish Raja",
+    text: "Excellent service! They gave me the best price for my old Kanchipuram sarees. The process was transparent and payment was instant.",
+    rating: 5,
+  },
+  {
+    name: "Ramkumar",
+    text: "Very professional team. They came home and evaluated my mother's old silk sarees respectfully. Highly recommend!",
+    rating: 5,
+  },
+  {
+    name: "Priya Lakshmi",
+    text: "Trusted and reliable buyers. Got a fair price for my grandmother's collection. The staff was courteous and prompt.",
+    rating: 5,
+  },
+];
+const branches = [
+  {
+    name: "Lakshmi Pattu Center",
+    area: "Planner Selvam Park Signal, CSI Church Opposite, Erode - 1",
+    phone: "+91 90256 52123",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.1!2d77.7172!3d11.3410!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDIwJzI3LjYiTiA3N8KwNDMnMDIuMCJF!5e0!3m2!1sen!2sin!4v1700000000000",
+    mapLink: "https://maps.google.com/?q=Lakshmi+Pattu+Center+Erode",
+    color: "#c8922a",
+  },
+  {
+    name: "Kaanjithangamayil",
+    area: "62, Nethaji Complex, Supreme Tower Opposite, Manikoondu, Erode - 1",
+    phone: "+91 90256 52123",
+    mapEmbed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.2!2d77.7200!3d11.3420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDIwJzMxLjIiTiA3N8KwNDMnMTIuMCJF!5e0!3m2!1sen!2sin!4v1700000000001",
+    mapLink: "https://maps.google.com/?q=Kaanjithangamayil+Erode+Manikoondu",
+    color: "#7b1f1f",
+  },
 ];
 
 const faqs = [
-  { q: "What types of sarees do you buy?", a: "We buy all types of old silk sarees including Kanchipuram, Banarasi, Mysore, Arani, Thirubuvanam, Tissue sarees, Pattu Pavadai, 9-yard sarees, and more." },
-  { q: "How do you determine the price?", a: "We assess each saree based on silk quality, weaving type, zari content, design intricacy, and current market rates. Our evaluation is fully transparent." },
-  { q: "Do you provide home pickup service?", a: "Yes! We offer doorstep pickup across Erode. For bulk collections, we arrange home visits on call." },
-  { q: "Is payment made immediately?", a: "Absolutely. We provide on-the-spot cash payment immediately after evaluation. No delays, no bank transfers." },
-  { q: "What is your service area?", a: "We operate from Erode and have branches in Salem, Chennai, Trichy, and Erode." },
+  {
+    q: "What types of sarees do you buy?",
+    a: "We buy all types of old silk sarees including Kanchipuram, Banarasi, Mysore, Arani, Thirubuvanam, Tissue sarees, Pattu Pavadai, 9-yard sarees, and more.",
+  },
+  {
+    q: "How do you determine the price?",
+    a: "We assess each saree based on silk quality, weaving type, zari content, design intricacy, and current market rates. Our evaluation is fully transparent.",
+  },
+  {
+    q: "Do you provide home pickup service?",
+    a: "Yes! We offer doorstep pickup across Erode. For bulk collections, we arrange home visits on call.",
+  },
+  {
+    q: "Is payment made immediately?",
+    a: "Absolutely. We provide on-the-spot cash payment immediately after evaluation. No delays, no bank transfers.",
+  },
+  {
+    q: "What is your service area?",
+    a: "We operate from Erode and have branches in Salem, Chennai, Trichy, and Erode.",
+  },
 ];
 
 /* ── THREE.JS HERO CANVAS ── */
@@ -734,14 +931,20 @@ function ThreeHero() {
   useEffect(() => {
     let animId;
     const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    script.src =
+      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
     script.onload = () => {
       const THREE = window.THREE;
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      const W = canvas.offsetWidth, H = canvas.offsetHeight;
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      const W = canvas.offsetWidth,
+        H = canvas.offsetHeight;
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+      });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(W, H);
 
@@ -754,14 +957,23 @@ function ThreeHero() {
       const pos = new Float32Array(count * 3);
       for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 22;
       geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-      const pMat = new THREE.PointsMaterial({ color: 0xc8922a, size: 0.06, transparent: true, opacity: 0.85 });
+      const pMat = new THREE.PointsMaterial({
+        color: 0xc8922a,
+        size: 0.06,
+        transparent: true,
+        opacity: 0.85,
+      });
       const points = new THREE.Points(geo, pMat);
       scene.add(points);
 
       const rings = [];
       for (let i = 0; i < 6; i++) {
         const rg = new THREE.TorusGeometry(1.5 + i * 0.7, 0.012, 16, 100);
-        const rm = new THREE.MeshBasicMaterial({ color: 0xc8922a, transparent: true, opacity: 0.12 - i * 0.015 });
+        const rm = new THREE.MeshBasicMaterial({
+          color: 0xc8922a,
+          transparent: true,
+          opacity: 0.12 - i * 0.015,
+        });
         const ring = new THREE.Mesh(rg, rm);
         ring.rotation.x = Math.random() * Math.PI;
         ring.rotation.y = Math.random() * Math.PI;
@@ -772,25 +984,53 @@ function ThreeHero() {
       const ribbons = [];
       for (let i = 0; i < 10; i++) {
         const rg = new THREE.PlaneGeometry(0.04, 2.5 + Math.random() * 2);
-        const rm = new THREE.MeshBasicMaterial({ color: 0xc8922a, transparent: true, opacity: 0.05 + Math.random() * 0.07, side: THREE.DoubleSide });
+        const rm = new THREE.MeshBasicMaterial({
+          color: 0xc8922a,
+          transparent: true,
+          opacity: 0.05 + Math.random() * 0.07,
+          side: THREE.DoubleSide,
+        });
         const m = new THREE.Mesh(rg, rm);
-        m.position.set((Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 5 - 2);
+        m.position.set(
+          (Math.random() - 0.5) * 14,
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 5 - 2,
+        );
         m.rotation.z = Math.random() * Math.PI;
         scene.add(m);
-        ribbons.push({ mesh: m, speed: 0.003 + Math.random() * 0.006, offset: Math.random() * Math.PI * 2 });
+        ribbons.push({
+          mesh: m,
+          speed: 0.003 + Math.random() * 0.006,
+          offset: Math.random() * Math.PI * 2,
+        });
       }
 
       const jewels = [];
       for (let i = 0; i < 6; i++) {
         const jg = new THREE.OctahedronGeometry(0.15 + Math.random() * 0.15);
-        const jm = new THREE.MeshBasicMaterial({ color: 0xc8922a, wireframe: true, transparent: true, opacity: 0.2 });
+        const jm = new THREE.MeshBasicMaterial({
+          color: 0xc8922a,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.2,
+        });
         const j = new THREE.Mesh(jg, jm);
-        j.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 4 - 2);
+        j.position.set(
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 6,
+          (Math.random() - 0.5) * 4 - 2,
+        );
         scene.add(j);
-        jewels.push({ mesh: j, ry: 0.01 + Math.random() * 0.02, rz: 0.005 + Math.random() * 0.01, offset: Math.random() * Math.PI * 2 });
+        jewels.push({
+          mesh: j,
+          ry: 0.01 + Math.random() * 0.02,
+          rz: 0.005 + Math.random() * 0.01,
+          offset: Math.random() * Math.PI * 2,
+        });
       }
 
-      let mouseX = 0, mouseY = 0;
+      let mouseX = 0,
+        mouseY = 0;
       const handleMouse = (e) => {
         mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
         mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
@@ -809,9 +1049,19 @@ function ThreeHero() {
         const time = t * 0.001;
         points.rotation.y = time * 0.04 + mouseX * 0.1;
         points.rotation.x = time * 0.015 + mouseY * 0.05;
-        rings.forEach((r, i) => { r.rotation.x += 0.003 + i * 0.0005; r.rotation.y += 0.004; });
-        ribbons.forEach(({ mesh, speed, offset }) => { mesh.rotation.z += speed * 0.5; mesh.position.y += Math.sin(time + offset) * 0.003; });
-        jewels.forEach(({ mesh, ry, rz, offset }) => { mesh.rotation.y += ry; mesh.rotation.z += rz; mesh.position.y += Math.sin(time * 0.8 + offset) * 0.003; });
+        rings.forEach((r, i) => {
+          r.rotation.x += 0.003 + i * 0.0005;
+          r.rotation.y += 0.004;
+        });
+        ribbons.forEach(({ mesh, speed, offset }) => {
+          mesh.rotation.z += speed * 0.5;
+          mesh.position.y += Math.sin(time + offset) * 0.003;
+        });
+        jewels.forEach(({ mesh, ry, rz, offset }) => {
+          mesh.rotation.y += ry;
+          mesh.rotation.z += rz;
+          mesh.position.y += Math.sin(time * 0.8 + offset) * 0.003;
+        });
         camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.05;
         camera.position.y += (mouseY * 0.2 - camera.position.y) * 0.05;
         camera.lookAt(scene.position);
@@ -829,7 +1079,9 @@ function ThreeHero() {
     };
     document.head.appendChild(script);
 
-    return () => { cancelAnimationFrame(animId); };
+    return () => {
+      cancelAnimationFrame(animId);
+    };
   }, []);
 
   return <canvas ref={canvasRef} id="hero-canvas" />;
@@ -840,40 +1092,93 @@ function Counter({ target, suffix = "" }) {
   const [val, setVal] = useState(0);
   const ref = useRef(null);
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        let v = 0;
-        const step = () => {
-          v += Math.ceil(target / 55);
-          if (v >= target) { setVal(target); return; }
-          setVal(v); requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        obs.disconnect();
-      }
-    }, { threshold: 0.3 });
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          let v = 0;
+          const step = () => {
+            v += Math.ceil(target / 55);
+            if (v >= target) {
+              setVal(target);
+              return;
+            }
+            setVal(v);
+            requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, [target]);
-  return <span ref={ref} className="counter-num">{val}{suffix}</span>;
+  return (
+    <span ref={ref} className="counter-num">
+      {val}
+      {suffix}
+    </span>
+  );
 }
 
 /* ── MOBILE NAV DRAWER ── */
 function MobileNav({ open, onClose }) {
   return (
     <div className={`mobile-nav ${open ? "open" : ""}`} onClick={onClose}>
-      <div className="mobile-nav-inner" onClick={e => e.stopPropagation()}>
+      <div className="mobile-nav-inner" onClick={(e) => e.stopPropagation()}>
         <div className="mobile-nav-logo">Sri Lakshmi Pattu Center</div>
         <div className="mobile-nav-sub">Old Silk Saree Buyers · Erode</div>
         <ul className="mobile-nav-links">
-          {[["Home", "#home"], ["About Us", "#about"], ["Products", "#products"], ["FAQ", "#faq"], ["Contact", "#contact"]].map(([label, href]) => (
-            <li key={href}><a href={href} onClick={onClose}>{label}</a></li>
+          {[
+            ["Home", "#home"],
+            ["About Us", "#about"],
+            ["Products", "#products"],
+            ["Our Locations", "#branches"],
+            ["FAQ", "#faq"],
+            ["Contact", "#contact"],
+          ].map(([label, href]) => (
+            <li key={href}>
+              <a href={href} onClick={onClose}>
+                {label}
+              </a>
+            </li>
           ))}
         </ul>
-        <a href="#contact" className="mobile-nav-cta" onClick={onClose}>Get Free Quote</a>
+        <a href="#contact" className="mobile-nav-cta" onClick={onClose}>
+          Get Free Quote
+        </a>
         <div style={{ marginTop: 28, display: "flex", gap: 12 }}>
-          <a href="tel:+917010506200" style={{ flex: 1, background: "var(--gold)", color: "#fff", padding: "12px", textAlign: "center", textDecoration: "none", fontWeight: 600, fontSize: 14 }}>📞 Call</a>
-          <a href="https://wa.me/917010506200" style={{ flex: 1, background: "#25d366", color: "#fff", padding: "12px", textAlign: "center", textDecoration: "none", fontWeight: 600, fontSize: 14 }}>💬 WhatsApp</a>
+          <a
+            href="tel:+919025652123"
+            style={{
+              flex: 1,
+              background: "var(--gold)",
+              color: "#fff",
+              padding: "12px",
+              textAlign: "center",
+              textDecoration: "none",
+              fontWeight: 600,
+              fontSize: 14,
+            }}
+          >
+            📞 Call
+          </a>
+          <a
+            href="https://wa.me/919025652123"
+            style={{
+              flex: 1,
+              background: "#25d366",
+              color: "#fff",
+              padding: "12px",
+              textAlign: "center",
+              textDecoration: "none",
+              fontWeight: 600,
+              fontSize: 14,
+            }}
+          >
+            💬 WhatsApp
+          </a>
         </div>
       </div>
     </div>
@@ -883,34 +1188,69 @@ function MobileNav({ open, onClose }) {
 /* ── MAIN ── */
 export default function App() {
   const [openFaq, setOpenFaq] = useState(null);
-  const [form, setForm] = useState({ name: "", phone: "", city: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    city: "",
+    message: "",
+  });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1 }
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("visible");
+        }),
+      { threshold: 0.1 },
     );
-    document.querySelectorAll(".reveal, .reveal-left, .reveal-right").forEach((el) => obs.observe(el));
+    document
+      .querySelectorAll(".reveal, .reveal-left, .reveal-right")
+      .forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
 
   // Prevent body scroll when mobile nav open
   useEffect(() => {
     document.body.style.overflow = mobileNavOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileNavOpen]);
 
   const submit = (e) => {
     e.preventDefault();
-    alert("Thank you! We will contact you shortly.");
-    addData(form)
+    addData(form);
     setForm({ name: "", phone: "", city: "", message: "" });
+    setShowPopup(true);
+    setTimeout(() => {
+      window.open(
+        `https://wa.me/919025652123?text=${encodeURIComponent("I have registered from website and want to know more!")}`,
+        "_blank",
+      );
+    }, 1800);
   };
-
   return (
     <>
       <style>{CSS}</style>
+
+      {/* SUCCESS POPUP */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={() => setShowPopup(false)}>
+          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+            <span className="popup-icon">🎉</span>
+            <h3>You're Registered!</h3>
+            <p>
+              Thank you! We've received your details and will contact you
+              shortly. You're now eligible for exciting discounts & gifts!
+            </p>
+            <button className="popup-close" onClick={() => setShowPopup(false)}>
+              Wonderful, Thank You!
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* MOBILE NAV */}
       <MobileNav open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
@@ -923,15 +1263,77 @@ export default function App() {
         </div>
         {/* Desktop links */}
         <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#about">About Us</a>
+          </li>
           <li className="has-dropdown">
             <a href="#products">Products ▾</a>
-            <div className="dropdown">{products.map((p, i) => <a key={i} href="#products">{p.name}</a>)}</div>
+            <div className="dropdown">
+              {products.map((p, i) => (
+                <a key={i} href="#products">
+                  {p.name}
+                </a>
+              ))}
+            </div>
           </li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact" className="nav-cta">Get Free Quote</a></li>
+          <li>
+            <a href="#faq">FAQ</a>
+          </li>
+          <li className="has-dropdown">
+            <a href="#branches"> Locations ▾</a>
+            <div className="dropdown" style={{ minWidth: 320 }}>
+              {branches.map((b, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "14px 20px",
+                    borderBottom: "1px solid #f0e8d8",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: "'Playfair Display',serif",
+                      fontWeight: 700,
+                      color: "var(--deep)",
+                      fontSize: 15,
+                      marginBottom: 4,
+                    }}
+                  >
+                    {b.name}
+                  </div>
+                  <div
+                    style={{ fontSize: 13, color: "#6a5540", marginBottom: 6 }}
+                  >
+                    {b.area}
+                  </div>
+                  <a
+                    href={b.mapLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      fontSize: 13,
+                      color: "var(--gold)",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                    }}
+                  >
+                    📍 View on Map →
+                  </a>
+                </div>
+              ))}
+            </div>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+          <li>
+            <a href="#contact" className="nav-cta">
+              Get Free Quote
+            </a>
+          </li>
         </ul>
         {/* Hamburger */}
         <button
@@ -939,33 +1341,65 @@ export default function App() {
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           aria-label="Toggle menu"
         >
-          <span /><span /><span />
+          <span />
+          <span />
+          <span />
         </button>
       </nav>
 
       {/* ─── HERO ─── */}
       <section id="home" className="hero">
         <ThreeHero />
+        <div className="hero-img-right">
+          <img src={HeroWoman} alt="Silk Saree" />
+        </div>
         <div className="hero-content">
-          <div className="hero-badge">Erode's Most Trusted Silk Saree Buyers</div>
-          <h2>Get <em>Top Value</em> for Your Old Silk Sarees</h2>
-          <p>We buy old pattu sarees, silk sarees, pattu pavadai, and silver items — fast, fair, and hassle-free. Instant cash payment guaranteed.</p>
+          <div className="hero-badge">
+            Erode's Most Trusted Silk Saree Buyers
+          </div>
+          <h2>
+            Get <em>Top Value</em> for Your Old Silk Sarees
+          </h2>
+          <p>
+            We buy old pattu sarees, silk sarees, pattu pavadai, and silver
+            items — fast, fair, and hassle-free. Instant cash payment
+            guaranteed.
+          </p>
           <div className="hero-btns">
-            <a href="tel:+917010506200" className="btn-primary">📞 Call Now</a>
-            <a href="#contact" className="btn-outline">Get Free Quote</a>
+            <a href="tel:+919025652123" className="btn-primary">
+              📞 Call Now
+            </a>
+            <a href="#contact" className="btn-outline">
+              Get Free Quote
+            </a>
           </div>
         </div>
         <div className="hero-stats">
-          <div className="hero-stat"><div className="num">20+</div><div className="lbl">Years Experience</div></div>
-          <div className="hero-stat"><div className="num">50K+</div><div className="lbl">Sarees Bought</div></div>
-          <div className="hero-stat"><div className="num">4.6★</div><div className="lbl">Google Rating</div></div>
+          <div className="hero-stat">
+            <div className="num">20+</div>
+            <div className="lbl">Years Experience</div>
+          </div>
+          <div className="hero-stat">
+            <div className="num">50K+</div>
+            <div className="lbl">Sarees Bought</div>
+          </div>
+          <div className="hero-stat">
+            <div className="num">4.6★</div>
+            <div className="lbl">Google Rating</div>
+          </div>
         </div>
       </section>
 
       {/* MARQUEE */}
       <div className="marquee-wrap">
         <div className="marquee-track">
-          {Array(12).fill("✦ Old Silk Saree Buyers ✦ Best Price Guaranteed ✦ Instant Cash ✦ Doorstep Service ✦ 20+ Years Experience").map((t, i) => <span key={i}>{t}</span>)}
+          {Array(12)
+            .fill(
+              "✦ Old Silk Saree Buyers ✦ Best Price Guaranteed ✦ Instant Cash ✦ Doorstep Service ✦ 20+ Years Experience",
+            )
+            .map((t, i) => (
+              <span key={i}>{t}</span>
+            ))}
         </div>
       </div>
 
@@ -974,14 +1408,27 @@ export default function App() {
         <div className="about-grid">
           <div className="about-img-wrap reveal-left">
             <div>
-              <img src={HeroWoman} className="about-img-3d" placeholder="Woman with Smile and saree"/>
+              <img
+                src={HeroWoman}
+                className="about-img-3d"
+                placeholder="Woman with Smile and saree"
+              />
             </div>
-            <div className="about-badge"><div className="num">20+</div><div className="lbl">Years Experience</div></div>
+            <div className="about-badge">
+              <div className="num">20+</div>
+              <div className="lbl">Years Experience</div>
+            </div>
           </div>
           <div className="reveal-right">
             <div className="section-label">Welcome to Our Center</div>
-            <h2 className="section-title">Sri Lakshmi  <em>Pattu Center</em></h2>
-            <p className="section-sub">Erode's most trusted destination for old silk saree buyers. With 20+ years of experience, we stand as a symbol of trust, transparency, and fair value.</p>
+            <h2 className="section-title">
+              Sri Lakshmi <em>Pattu Center</em>
+            </h2>
+            <p className="section-sub">
+              Erode's most trusted destination for old silk saree buyers. With
+              20+ years of experience, we stand as a symbol of trust,
+              transparency, and fair value.
+            </p>
             <ul className="about-check-list">
               <li>Buying Old Silk Sarees &amp; Old Pattu Sarees</li>
               <li>Old Pattu Pavadai &amp; Silk Saree Dresses</li>
@@ -992,7 +1439,14 @@ export default function App() {
               <span style={{ fontSize: 28 }}>📞</span>
               <div>
                 <div className="lbl">Call to ask any question</div>
-                <div className="num"><a href="tel:+917010506200" style={{ color: "inherit", textDecoration: "none" }}>+9170105 06200</a></div>
+                <div className="num">
+                  <a
+                    href="tel:+919025652123"
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    +91 90256 52123
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1003,12 +1457,20 @@ export default function App() {
       <section className="process-section">
         <div className="max-w">
           <div className="reveal" style={{ textAlign: "center" }}>
-            <div className="section-label" style={{ color: "var(--gold)" }}>How It Works</div>
-            <h2 className="section-title">Our Simple <em>Buying Process</em></h2>
+            <div className="section-label" style={{ color: "var(--gold)" }}>
+              How It Works
+            </div>
+            <h2 className="section-title">
+              Our Simple <em>Buying Process</em>
+            </h2>
           </div>
           <div className="process-grid">
             {steps.map((s, i) => (
-              <div key={i} className="process-step reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
+              <div
+                key={i}
+                className="process-step reveal"
+                style={{ transitionDelay: `${i * 0.15}s` }}
+              >
                 <div className="step-num">{s.icon}</div>
                 <div className="step-label">Step {s.num}</div>
                 <h3>{s.title}</h3>
@@ -1028,7 +1490,11 @@ export default function App() {
             { t: 5, s: "", l: "Branch Locations" },
             { t: 3223, s: "+", l: "Happy Customers" },
           ].map((s, i) => (
-            <div key={i} className="reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
+            <div
+              key={i}
+              className="reveal"
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
               <Counter target={s.t} suffix={s.s} />
               <div className="counter-lbl">{s.l}</div>
             </div>
@@ -1036,35 +1502,164 @@ export default function App() {
         </div>
       </div>
 
-      {/* ─── WHAT WE BUY ─── */}
-      <section className="buy-section">
-        <div className="max-w">
-          <div className="reveal" style={{ textAlign: "center" }}>
-            <div className="section-label">What We Accept</div>
-            <h2 className="section-title">All Types of <em>Silk Materials</em></h2>
-          </div>
-          <div className="buy-grid">
-            {[
-              {title: "Old Silk Sarees", desc: "All varieties of old silk sarees purchased at premium rates." },
-              { emoji: "✨", title: "Old Pattu Sarees", desc: "Traditional pattu sarees evaluated by silk experts." },
-              { emoji: "👘", title: "Pattu Pavadai", desc: "Silk skirts and blouses accepted in any condition." },
-              { emoji: "🪡", title: "Silk Fabric Pieces", desc: "Silk saree dresses and fabric pieces also purchased." },
-            ].map((card, i) => (
-              <div key={i} className="flip-card reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="flip-inner">
-                  <div className="flip-front">
-                    <h3>{card.title}</h3>
-                  </div>
-                  <div className="flip-back">
-                    <h3>{card.title}</h3>
-                    <p>{card.desc}</p>
-                    <button className="sell-btn" onClick={() => document.getElementById("contact").scrollIntoView({ behavior: "smooth" })}>Sell Now →</button>
+      {/* ─── EXCHANGE RATE SECTION ─── */}
+      <section
+        style={{
+          background: "var(--deep)",
+          padding: "90px 40px",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          className="max-w"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 60,
+            alignItems: "center",
+          }}
+        >
+          <div className="reveal-left">
+            <div className="section-label" style={{ color: "var(--gold)" }}>
+              Saree Valuation
+            </div>
+            <h2 className="section-title" style={{ color: "#fff" }}>
+              How Much Will You <em>Receive?</em>
+            </h2>
+            <p
+              style={{
+                color: "#c8b89a",
+                fontSize: 17,
+                lineHeight: 1.8,
+                marginBottom: 32,
+                fontWeight: 300,
+              }}
+            >
+              We evaluate every saree individually based on silk purity, zari
+              weight, weave type, and current market rates. Our transparent
+              process ensures you always receive the{" "}
+              <strong style={{ color: "var(--gold)" }}>
+                best possible value
+              </strong>
+              .
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 16,
+                marginBottom: 36,
+              }}
+            >
+              {[
+                {
+                  range: "₹500 – ₹5,000",
+                  label: "Regular Silk & Cotton-blend Sarees",
+                  icon: "🧵",
+                },
+                {
+                  range: "₹5,000 – ₹25,000",
+                  label: "Arani, Mysore & Thirubuvanam Silk",
+                  icon: "🌺",
+                },
+                {
+                  range: "₹25,000 – ₹1,00,000+",
+                  label: "Kanchipuram & Banarasi Heavy Zari Sarees",
+                  icon: "💎",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    gap: 16,
+                    alignItems: "center",
+                    background: "rgba(200,146,42,0.08)",
+                    borderLeft: "3px solid var(--gold)",
+                    padding: "16px 20px",
+                    borderRadius: "0 10px 10px 0",
+                    transition: "transform .3s",
+                    cursor: "default",
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.transform = "translateX(8px)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.transform = "translateX(0)")
+                  }
+                >
+                  <span style={{ fontSize: 28 }}>{item.icon}</span>
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "'Playfair Display',serif",
+                        color: "var(--gold)",
+                        fontSize: 20,
+                        fontWeight: 700,
+                      }}
+                    >
+                      {item.range}
+                    </div>
+                    <div
+                      style={{ color: "#9a8a78", fontSize: 14, marginTop: 2 }}
+                    >
+                      {item.label}
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+            <a href="#contact" className="btn-primary">
+              Get Your Free Quote →
+            </a>
+          </div>
+          <div className="reveal-right" style={{ position: "relative" }}>
+            <img
+              src={OldSilkSarees}
+              alt="Old Silk Sarees"
+              style={{
+                width: "100%",
+                borderRadius: 20,
+                boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+                display: "block",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                bottom: -20,
+                left: -20,
+                background: "var(--gold)",
+                borderRadius: 12,
+                padding: "20px 28px",
+                boxShadow: "0 10px 40px rgba(200,146,42,0.5)",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Playfair Display',serif",
+                  fontSize: 32,
+                  color: "#fff",
+                  lineHeight: 1,
+                }}
+              >
+                ₹1L+
               </div>
-            ))}
+              <div
+                style={{
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.85)",
+                  letterSpacing: 1,
+                  textTransform: "uppercase",
+                  marginTop: 4,
+                }}
+              >
+                Maximum Paid
+              </div>
+            </div>
           </div>
         </div>
+        <style>{`@media(max-width:768px){.exchange-grid{grid-template-columns:1fr!important}}`}</style>
       </section>
 
       {/* ─── PRODUCTS ─── */}
@@ -1072,16 +1667,27 @@ export default function App() {
         <div className="max-w">
           <div className="reveal" style={{ textAlign: "center" }}>
             <div className="section-label">Our Buying Products</div>
-            <h2 className="section-title">Browse Our <em>Product Categories</em></h2>
+            <h2 className="section-title">
+              Browse Our <em>Product Categories</em>
+            </h2>
           </div>
           <div className="products-grid">
             {products.map((p, i) => (
-              <div key={i} className="product-card reveal" style={{ transitionDelay: `${(i % 3) * 0.12}s` }}>
+              <div
+                key={i}
+                className="product-card reveal"
+                style={{ transitionDelay: `${(i % 3) * 0.12}s` }}
+              >
                 <div className="product-card-img">
-                  {p.isImg
-                    ? <img src={p.emoji} alt={p.name} style={{ height: "100%", width: "120%" }} />
-                    : p.emoji
-                  }
+                  {p.isImg ? (
+                    <img
+                      src={p.emoji}
+                      alt={p.name}
+                      style={{ height: "100%", width: "120%" }}
+                    />
+                  ) : (
+                    p.emoji
+                  )}
                 </div>
                 <div className="product-card-body">
                   <h3>{p.name}</h3>
@@ -1090,27 +1696,13 @@ export default function App() {
               </div>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 40 }} className="reveal">
-            <a href="#contact" className="btn-primary">View All &amp; Sell Now</a>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── WHY US ─── */}
-      <section style={{ background: "#f5ede0" }}>
-        <div className="max-w">
-          <div className="reveal">
-            <div className="section-label">Why Choose Us</div>
-            <h2 className="section-title">Why Choose Sri Lakshmi  <em>Pattu Center?</em></h2>
-          </div>
-          <div className="why-grid">
-            {whyUs.map((w, i) => (
-              <div key={i} className="why-card reveal" style={{ transitionDelay: `${(i % 3) * 0.12}s` }}>
-                <span className="why-icon">{w.icon}</span>
-                <h3>{w.title}</h3>
-                <p>{w.desc}</p>
-              </div>
-            ))}
+          <div
+            style={{ textAlign: "center", marginTop: 40 }}
+            className="reveal"
+          >
+            <a href="#contact" className="btn-primary">
+              View All &amp; Sell Now
+            </a>
           </div>
         </div>
       </section>
@@ -1126,12 +1718,18 @@ export default function App() {
             </div>
             <div className="reveal-right">
               <div className="section-label">Customer Reviews</div>
-              <h2 className="section-title">What Our <em>Customers Say</em></h2>
+              <h2 className="section-title">
+                What Our <em>Customers Say</em>
+              </h2>
             </div>
           </div>
           <div className="testimonials-grid">
             {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
+              <div
+                key={i}
+                className="testimonial-card reveal"
+                style={{ transitionDelay: `${i * 0.15}s` }}
+              >
                 <div className="qt">"</div>
                 <p>{t.text}</p>
                 <div className="stars">{"★".repeat(t.rating)}</div>
@@ -1143,18 +1741,121 @@ export default function App() {
       </section>
 
       {/* ─── BRANCHES ─── */}
-      <section className="branches-section">
+      <section id="branches" className="branches-section">
         <div className="max-w">
           <div className="reveal" style={{ textAlign: "center" }}>
-            <div className="section-label">Our Branches</div>
-            <h2 className="section-title">We Are <em>Across Tamil Nadu</em></h2>
+            <div className="section-label">Our Showrooms</div>
+            <h2 className="section-title">
+              Visit Us at Our <em>Two Locations</em>
+            </h2>
+            <p
+              style={{
+                color: "#9a8a78",
+                maxWidth: 520,
+                margin: "12px auto 0",
+                fontSize: 16,
+              }}
+            >
+              Two premium showrooms in the heart of Erode, each offering the
+              same trusted experience.
+            </p>
           </div>
-          <div className="branches-grid">
-            {["Erode", "Salem", "Chennai", "Trichy", "Erode"].map((b, i) => (
-              <div key={i} className="branch-card reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
-                <span className="icon">📍</span>
-                <h3>{b}</h3>
-                <p>+9170105 06200</p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 32,
+              marginTop: 50,
+              maxWidth: 1000,
+              margin: "50px auto 0",
+            }}
+            className="branches-two-grid"
+          >
+            {branches.map((b, i) => (
+              <div
+                key={i}
+                className="branch-card-full reveal"
+                style={{ transitionDelay: `${i * 0.15}s` }}
+              >
+                <div
+                  style={{
+                    borderTop: `4px solid ${b.color}`,
+                    background: "rgba(255,255,255,0.05)",
+                    borderRadius: 12,
+                    padding: "32px 28px",
+                    border: "1px solid rgba(200,146,42,0.25)",
+                    backdropFilter: "blur(4px)",
+                  }}
+                >
+                  <div style={{ fontSize: 36, marginBottom: 12 }}>🏪</div>
+                  <h3
+                    style={{
+                      fontFamily: "'Playfair Display',serif",
+                      color: "#fff",
+                      fontSize: 22,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {b.name}
+                  </h3>
+                  <p
+                    style={{
+                      color: "#c8b89a",
+                      fontSize: 14,
+                      lineHeight: 1.7,
+                      marginBottom: 16,
+                    }}
+                  >
+                    📍 {b.area}
+                  </p>
+                  <p
+                    style={{
+                      color: "var(--gold)",
+                      fontSize: 15,
+                      marginBottom: 20,
+                    }}
+                  >
+                    📞 {b.phone}
+                  </p>
+                  <div
+                    style={{
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      marginBottom: 16,
+                      border: "1px solid rgba(200,146,42,0.3)",
+                    }}
+                  >
+                    <iframe
+                      src={b.mapEmbed}
+                      width="100%"
+                      height="200"
+                      style={{ border: 0, display: "block" }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title={b.name}
+                    />
+                  </div>
+                  <a
+                    href={b.mapLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: "block",
+                      textAlign: "center",
+                      background: "var(--gold)",
+                      color: "#fff",
+                      padding: "12px",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      borderRadius: 6,
+                      fontSize: 14,
+                      transition: "background .2s",
+                    }}
+                  >
+                    📍 Get Directions
+                  </a>
+                </div>
               </div>
             ))}
           </div>
@@ -1166,29 +1867,196 @@ export default function App() {
         <div className="max-w">
           <div className="reveal" style={{ textAlign: "center" }}>
             <div className="section-label">Our Promise</div>
-            <h2 className="section-title">What We <em>Guarantee</em> You</h2>
+            <h2 className="section-title">
+              What We <em>Guarantee</em> You
+            </h2>
           </div>
           <div className="promise-grid">
             <ul className="promise-list reveal-left">
               {[
-                { title: "Fair Market Value", desc: "Genuine rates based on current silk market prices." },
-                { title: "Instant Cash Payment", desc: "On-the-spot payment with no delays." },
-                { title: "Quick Evaluation", desc: "Fast, expert assessment of your silk items." },
-                { title: "Professional & Friendly Service", desc: "Courteous staff ensuring a comfortable experience." },
-                { title: "Doorstep Collection", desc: "Available for select locations across Erode." },
+                {
+                  title: "Fair Market Value",
+                  desc: "Genuine rates based on current silk market prices.",
+                },
+                {
+                  title: "Instant Cash Payment",
+                  desc: "On-the-spot payment with no delays.",
+                },
+                {
+                  title: "Quick Evaluation",
+                  desc: "Fast, expert assessment of your silk items.",
+                },
+                {
+                  title: "Professional & Friendly Service",
+                  desc: "Courteous staff ensuring a comfortable experience.",
+                },
+                {
+                  title: "Doorstep Collection",
+                  desc: "Available for select locations across Erode.",
+                },
               ].map((item, i) => (
                 <li key={i}>
                   <div className="check">✓</div>
-                  <div><h4>{item.title}</h4><p>{item.desc}</p></div>
+                  <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
+                  </div>
                 </li>
               ))}
             </ul>
             <div className="promise-cta-box reveal-right">
               <h3>Ready to Sell Your Old Silk Sarees?</h3>
-              <p>Contact us today for a free evaluation and instant cash payment. We come to your doorstep!</p>
-              <a href="tel:+917010506200" className="phone">+9170105 06200</a>
-              <a href="tel:+917010506200" className="btn-primary" style={{ display: "block", marginBottom: 12 }}>📞 Call Now</a>
-              <a href="https://wa.me/917010506200" className="btn-outline" style={{ display: "block", color: "#fff" }}>💬 WhatsApp Us</a>
+              <p>
+                Contact us today for a free evaluation and instant cash payment.
+                We come to your doorstep!
+              </p>
+              <a href="tel:+919025652123" className="phone">
+                +91 90256 52123
+              </a>
+              <a
+                href="tel:+919025652123"
+                className="btn-primary"
+                style={{ display: "block", marginBottom: 12 }}
+              >
+                📞 Call Now
+              </a>
+              <a
+                href="https://wa.me/919025652123"
+                className="btn-outline"
+                style={{ display: "block", color: "#fff" }}
+              >
+                💬 WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE */}
+      <div className="marquee-wrap">
+        <div className="marquee-track">
+          {Array(12)
+            .fill(
+              "✦ Old Silk Saree Buyers ✦ Best Price Guaranteed ✦ Instant Cash ✦ Doorstep Service ✦ 20+ Years Experience",
+            )
+            .map((t, i) => (
+              <span key={i}>{t}</span>
+            ))}
+        </div>
+      </div>
+
+      {/* ─── CONTACT ─── */}
+      <section id="contact" style={{ background: "#fff" }}>
+        <div className="max-w">
+          <div className="reveal" style={{ textAlign: "center" }}>
+            <div className="section-label">🎁 Register & Win</div>
+            <h2 className="section-title">
+              Register Now & Unlock <em>Exciting Gifts!</em>
+            </h2>
+            <p
+              className="section-sub"
+              style={{ margin: "12px auto 0", textAlign: "center" }}
+            >
+              Fill in your details below to register and stand a chance to win
+              exclusive discounts, surprise gifts, and priority home pickup
+              service!
+            </p>
+          </div>
+          <div className="contact-grid">
+            <div className="reveal-left">
+              {[
+                {
+                  icon: "📞",
+                  title: "Call Us",
+                  content: <a href="tel:+919025652123">+91 90256 52123</a>,
+                },
+                {
+                  icon: "✉️",
+                  title: "Email Us",
+                  content: (
+                    <a href="mailto:lakshmipattucbe@gmail.com">
+                      lakshmipattucbe@gmail.com
+                    </a>
+                  ),
+                },
+                {
+                  icon: "📍",
+                  title: "Head Office",
+                  content: (
+                    <p>
+                      No 155/4, Opposite Pothys, Cross Cut Rd, Erode, Tamil Nadu
+                      – 641012
+                    </p>
+                  ),
+                },
+                {
+                  icon: "🕐",
+                  title: "Working Hours",
+                  content: <p>Mon – Sat: 9:00 AM – 7:00 PM</p>,
+                },
+              ].map((item, i) => (
+                <div key={i} className="contact-info-item">
+                  <div className="icon">{item.icon}</div>
+                  <div>
+                    <h4>{item.title}</h4>
+                    {item.content}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="reveal-right">
+              <form onSubmit={submit}>
+                {[
+                  {
+                    label: "Your Name",
+                    field: "name",
+                    type: "text",
+                    ph: "Enter your full name",
+                  },
+                  {
+                    label: "Phone Number",
+                    field: "phone",
+                    type: "tel",
+                    ph: "+91 XXXXX XXXXX",
+                  },
+                  {
+                    label: "Your City",
+                    field: "city",
+                    type: "text",
+                    ph: "Erode, Salem...",
+                  },
+                ].map(({ label, field, type, ph }) => (
+                  <div key={field} className="form-group">
+                    <label>{label}</label>
+                    <input
+                      type={type}
+                      value={form[field]}
+                      onChange={(e) =>
+                        setForm({ ...form, [field]: e.target.value })
+                      }
+                      placeholder={ph}
+                      required={field !== "city"}
+                    />
+                  </div>
+                ))}
+                <div className="form-group">
+                  <label>Message (Optional)</label>
+                  <textarea
+                    value={form.message}
+                    onChange={(e) =>
+                      setForm({ ...form, message: e.target.value })
+                    }
+                    placeholder="Tell us about your sarees..."
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  style={{ width: "100%", fontSize: 16, padding: 16 }}
+                >
+                  🎁 Register & Claim My Gift
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -1199,64 +2067,29 @@ export default function App() {
         <div className="max-w">
           <div className="reveal" style={{ textAlign: "center" }}>
             <div className="section-label">Common Questions</div>
-            <h2 className="section-title">Frequently Asked <em>Questions</em></h2>
+            <h2 className="section-title">
+              Frequently Asked <em>Questions</em>
+            </h2>
           </div>
           <div className="faq-grid">
             {faqs.map((f, i) => (
-              <div key={i} className="faq-item reveal" style={{ transitionDelay: `${i * 0.08}s` }}>
-                <button className={`faq-q ${openFaq === i ? "open" : ""}`} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+              <div
+                key={i}
+                className="faq-item reveal"
+                style={{ transitionDelay: `${i * 0.08}s` }}
+              >
+                <button
+                  className={`faq-q ${openFaq === i ? "open" : ""}`}
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
                   {f.q}
                   <span className="indicator">+</span>
                 </button>
-                <div className={`faq-a ${openFaq === i ? "show" : ""}`}>{f.a}</div>
+                <div className={`faq-a ${openFaq === i ? "show" : ""}`}>
+                  {f.a}
+                </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── CONTACT ─── */}
-      <section id="contact" style={{ background: "#fff" }}>
-        <div className="max-w">
-          <div className="reveal" style={{ textAlign: "center" }}>
-            <div className="section-label">Get In Touch</div>
-            <h2 className="section-title">Contact <em>Us Today</em></h2>
-          </div>
-          <div className="contact-grid">
-            <div className="reveal-left">
-              {[
-                { icon: "📞", title: "Call Us", content: <a href="tel:+917010506200">+9170105 06200</a> },
-                { icon: "✉️", title: "Email Us", content: <a href="mailto:lakshmipattucbe@gmail.com">lakshmipattucbe@gmail.com</a> },
-                { icon: "📍", title: "Head Office", content: <p>No 155/4, Opposite Pothys, Cross Cut Rd, Erode, Tamil Nadu – 641012</p> },
-                { icon: "🕐", title: "Working Hours", content: <p>Mon – Sat: 9:00 AM – 7:00 PM</p> },
-              ].map((item, i) => (
-                <div key={i} className="contact-info-item">
-                  <div className="icon">{item.icon}</div>
-                  <div><h4>{item.title}</h4>{item.content}</div>
-                </div>
-              ))}
-            </div>
-            <div className="reveal-right">
-              <form onSubmit={submit}>
-                {[
-                  { label: "Your Name", field: "name", type: "text", ph: "Enter your full name" },
-                  { label: "Phone Number", field: "phone", type: "tel", ph: "+91 XXXXX XXXXX" },
-                  { label: "Your City", field: "city", type: "text", ph: "Erode, Salem..." },
-                ].map(({ label, field, type, ph }) => (
-                  <div key={field} className="form-group">
-                    <label>{label}</label>
-                    <input type={type} value={form[field]} onChange={(e) => setForm({ ...form, [field]: e.target.value })} placeholder={ph} required={field !== "city"} />
-                  </div>
-                ))}
-                <div className="form-group">
-                  <label>Message (Optional)</label>
-                  <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your sarees..." />
-                </div>
-                <button type="submit" className="btn-primary" style={{ width: "100%", fontSize: 16, padding: 16 }}>
-                  Send Message — Get Free Quote
-                </button>
-              </form>
-            </div>
           </div>
         </div>
       </section>
@@ -1267,33 +2100,170 @@ export default function App() {
           <div className="footer-brand reveal">
             <h2>Sri Lakshmi Pattu Center</h2>
             <div className="gold-line" />
-            <p>Erode's most trusted old silk saree buyers. Turning your silk treasures into instant value since 2004.</p>
+            <p>
+              Erode's most trusted old silk saree buyers. Turning your silk
+              treasures into instant value since 2004.
+            </p>
           </div>
           {[
-            { title: "Quick Links", links: [["Home", "#home"], ["About Us", "#about"], ["Products", "#products"], ["FAQ", "#faq"], ["Contact", "#contact"]] },
-            { title: "Branches", links: [["Erode", "#contact"], ["Salem", "#contact"], ["Chennai", "#contact"], ["Trichy", "#contact"], ["Erode", "#contact"]] },
-            { title: "Products", links: [["Kanchipuram Silk", "#products"], ["Banarasi Silk", "#products"], ["Tissue Sarees", "#products"], ["Mysore Silk", "#products"], ["Old Silver Items", "#products"]] },
+            {
+              title: "Quick Links",
+              links: [
+                ["Home", "#home"],
+                ["About Us", "#about"],
+                ["Products", "#products"],
+                ["FAQ", "#faq"],
+                ["Contact", "#contact"],
+              ],
+            },
+            {
+              title: "Branches",
+              links: [
+                ["Erode", "#contact"],
+                ["Salem", "#contact"],
+                ["Chennai", "#contact"],
+                ["Trichy", "#contact"],
+                ["Erode", "#contact"],
+              ],
+            },
+            {
+              title: "Products",
+              links: [
+                ["Kanchipuram Silk", "#products"],
+                ["Banarasi Silk", "#products"],
+                ["Tissue Sarees", "#products"],
+                ["Mysore Silk", "#products"],
+                ["Old Silver Items", "#products"],
+              ],
+            },
           ].map((col, i) => (
-            <div key={i} className="reveal" style={{ transitionDelay: `${(i + 1) * 0.1}s` }}>
+            <div
+              key={i}
+              className="reveal"
+              style={{ transitionDelay: `${(i + 1) * 0.1}s` }}
+            >
               <h4>{col.title}</h4>
-              <ul>{col.links.map(([l, h], j) => <li key={j}><a href={h}>{l}</a></li>)}</ul>
+              <ul>
+                {col.links.map(([l, h], j) => (
+                  <li key={j}>
+                    <a href={h}>{l}</a>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
         <div className="footer-bottom">
           <span>©2025 Sri Lakshmi Pattu Center. All Rights Reserved.</span>
           <div className="social-links">
-            <a href="https://wa.me/917010506200" className="social-link" target="_blank" rel="noreferrer">💬</a>
-            <a href="tel:+917010506200" className="social-link">📞</a>
-            <a href="mailto:lakshmipattucbe@gmail.com" className="social-link">✉️</a>
+            <a
+              href="https://wa.me/919025652123"
+              className="social-link"
+              target="_blank"
+              rel="noreferrer"
+              title="WhatsApp"
+            >
+              💬
+            </a>
+            <a href="tel:+919025652123" className="social-link" title="Call Us">
+              📞
+            </a>
+            <a
+              href="mailto:lakshmipattucbe@gmail.com"
+              className="social-link"
+              title="Email"
+            >
+              ✉️
+            </a>
+            <a
+              href="https://www.facebook.com/YOUR_PAGE"
+              className="social-link"
+              target="_blank"
+              rel="noreferrer"
+              title="Facebook"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/YOUR_HANDLE"
+              className="social-link"
+              target="_blank"
+              rel="noreferrer"
+              title="Instagram"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a
+              href="https://www.youtube.com/YOUR_CHANNEL"
+              className="social-link"
+              target="_blank"
+              rel="noreferrer"
+              title="YouTube"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
+                <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
+                <polygon
+                  points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
+                  fill="white"
+                />
+              </svg>
+            </a>
           </div>
         </div>
       </footer>
 
       {/* FLOATING BUTTONS */}
       <div className="float-btns">
-        <a href="https://wa.me/917010506200" className="float-btn float-wa" target="_blank" rel="noreferrer">💬</a>
-        <a href="tel:+917010506200" className="float-btn float-call">📞</a>
+        <a
+          href="https://wa.me/919025652123"
+          className="float-btn float-wa"
+          target="_blank"
+          rel="noreferrer"
+          title="Chat on WhatsApp"
+        >
+          <svg viewBox="0 0 32 32" width="26" height="26" fill="white">
+            <path d="M16 2C8.28 2 2 8.28 2 16c0 2.44.64 4.73 1.76 6.72L2 30l7.52-1.72A13.93 13.93 0 0016 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm7.24 19.36c-.3.84-1.76 1.6-2.44 1.68-.64.08-1.44.12-2.32-.16-.52-.16-1.2-.4-2.08-.76-3.64-1.56-6.04-5.2-6.22-5.44-.18-.24-1.44-1.92-1.44-3.64 0-1.72.9-2.56 1.22-2.92.3-.34.66-.42.88-.42.22 0 .44 0 .64.01.2.01.48-.08.74.56.28.66.94 2.28.1 2.7-.2.1-.36.2-.52.3-.18.12-.34.24-.18.48.18.26.78 1.28 1.68 2.08 1.16 1.02 2.12 1.34 2.42 1.5.3.16.48.14.66-.08.18-.22.76-.88 1.00-1.18.24-.3.48-.26.8-.14.32.12 2.04.96 2.38 1.14.34.18.58.26.66.4.08.16.08.9-.22 1.74z" />
+          </svg>
+        </a>
+        <a
+          href="#contact"
+          className="float-btn float-gift"
+          title="Win exciting gifts!"
+          onClick={(e) => {
+            e.preventDefault();
+            document
+              .getElementById("contact")
+              .scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <svg viewBox="0 0 32 32" width="24" height="24" fill="white">
+            <path d="M26 10h-2.46A5 5 0 0016 4a5 5 0 00-7.54 6H6a2 2 0 00-2 2v2a2 2 0 002 2h1v8a2 2 0 002 2h14a2 2 0 002-2v-8h1a2 2 0 002-2v-2a2 2 0 00-2-2zm-10-4a3 3 0 013 3H13a3 3 0 013-3zm-4 6h-6v-2h6zm2 12H9v-8h5zm8 0h-6v-8h6zm0-10h-6v-2h6z" />
+          </svg>
+          <span className="gift-ripple"></span>
+        </a>
       </div>
     </>
   );
