@@ -5,11 +5,11 @@ import HeroWomanTop from "./assets/Golden-Yellow-Kanjivaram-Silk-Saree.webp";
 import HeroWomanBottom from "./assets/hero-women-pos.png";
 import OldSilkSarees from "./assets/Money-To-Saree.png";
 
-import sareeImg1 from "./assets/saree_img_1.png";
+import sareeImg1 from "./assets/saree_img_1.jpg";
 import sareeImg2 from "./assets/saree_img_2.png";
 import sareeImg3 from "./assets/saree_img_3.png";
 import sareeImg4 from "./assets/saree_img_4.png";
-import sareeImg5 from "./assets/saree_img_5.png";
+import sareeImg5 from "./assets/saree_img_5.jpg";
 import sareeImg6 from "./assets/saree_img_6.png";
 import sareeImg7 from "./assets/saree_img_7.png";
 import sareeImg8 from "./assets/saree_img_8.png";
@@ -433,23 +433,23 @@ img { border-radius: 16px; }
 .branches-section { background: var(--deep); }
 .branches-section .section-title { color: #fff; }
 .branches-grid { max-width: 1200px; margin: 50px auto 0; display: grid; grid-template-columns: repeat(5,1fr); gap: 20px; }
-.branches-two-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding: 0 8px;
-}
 
-@media (max-width: 900px) {
-  .branches-two-grid { gap: 20px; }
+.branches-two-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  padding: 0;
+  max-width: 700px;
+  margin: 50px auto 0;
 }
 
 @media (max-width: 768px) {
   .branches-two-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0;
-  }
+  display: flex;
+  flex-direction: column;
+}
+}
+
 }
 .branch-card {
   background: rgba(255,255,255,0.05);
@@ -842,8 +842,8 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 
 /* ── DATA ── */
 const allProducts = [
-  { imgUrl: sareeImg1,  name: "Pattu Vethai",              desc: "Traditional Pattu Vethai sarees bought at best market rates." },
-  { imgUrl: sareeImg2,  name: "Pattu Sattai",              desc: "Authentic Pattu Sattai evaluated by silk experts." },
+  { imgUrl: sareeImg1,  name: "Pattu Veshti",              desc: "Traditional Pattu Vethai sarees bought at best market rates." },
+  { imgUrl: sareeImg2,  name: "Pattu Blouse",              desc: "Authentic Pattu Blouse evaluated by silk experts." },
   { imgUrl: sareeImg3,  name: "Pattu Thundu",              desc: "Fine Pattu Thundu pieces accepted in any condition." },
   { imgUrl: sareeImg4,  name: "Pattu Salai",               desc: "Premium Pattu Salai weaves — instant cash offered." },
   { imgUrl: sareeImg5,  name: "Pattu Pavadai",             desc: "Silk Pattu Pavadai and dresses purchased at fair value." },
@@ -857,7 +857,7 @@ const allProducts = [
   { imgUrl: sareeImg13, name: "Jangala Banarasi Sarees",   desc: "Heritage Jangala Banarasi — we buy all types." },
   { imgUrl: sareeImg14, name: "Thirli Onam Silk Sarees",   desc: "Festive Onam silk sarees accepted at premium rates." },
   { imgUrl: sareeImg15, name: "Kavaring Silk Sarees",      desc: "Beautiful Kavaring silk sarees evaluated fairly." },
-  { imgUrl: sareeImg16, name: "Mixed Jatiqui Silk Sarees", desc: "Mixed Jatiqui silk varieties — all types accepted." },
+  { imgUrl: sareeImg16, name: "Mixed Jarigai Silk Sarees", desc: "Mixed Jatiqui silk varieties — all types accepted." },
 ];
 
 const INITIAL_SHOW = 6;
@@ -944,7 +944,7 @@ const branches = [
   {
     name: "Lakshmi Pattu Center",
     area: "Planner Selvam Park Signal, CSI Church Opposite, Erode - 1",
-    phone: "+91 90256 52123",
+    phone: "+91 97913 09739",
     mapEmbed:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.1!2d77.7172!3d11.3410!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDIwJzI3LjYiTiA3N8KwNDMnMDIuMCJF!5e0!3m2!1sen!2sin!4v1700000000000",
     mapLink: "https://maps.google.com/?q=Lakshmi+Pattu+Center+Erode",
@@ -953,7 +953,7 @@ const branches = [
   {
     name: "Kaanjithangamayil",
     area: "62, Nethaji Complex, Supreme Tower Opposite, Manikoondu, Erode - 1",
-    phone: "+91 90256 52123",
+    phone: "+91 97913 09739",
     mapEmbed:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.2!2d77.7200!3d11.3420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDIwJzMxLjIiTiA3N8KwNDMnMTIuMCJF!5e0!3m2!1sen!2sin!4v1700000000001",
     mapLink: "https://maps.google.com/?q=Kaanjithangamayil+Erode+Manikoondu",
@@ -972,7 +972,7 @@ const faqs = [
   },
   {
     q: "Do you provide home pickup service?",
-    a: "Yes! We offer doorstep pickup across Erode. For bulk collections, we arrange home visits on call.",
+    a: "Yes! We offer doorstep pickup all over Tamil Nadu. For bulk collections, we arrange home visits on call.",
   },
   {
     q: "Is payment made immediately?",
@@ -1210,7 +1210,7 @@ function MobileNav({ open, onClose }) {
         </a>
         <div style={{ marginTop: 28, display: "flex", gap: 12 }}>
           <a
-            href="tel:+919025652123"
+            href="tel:+919791309739"
             style={{
               flex: 1,
               background: "var(--gold)",
@@ -1225,7 +1225,7 @@ function MobileNav({ open, onClose }) {
             📞 Call
           </a>
           <a
-            href="https://wa.me/919025652123"
+            href="https://wa.me/919791309739"
             style={{
               flex: 1,
               background: "#25d366",
@@ -1387,7 +1387,7 @@ export default function App() {
     setShowPopup(true);
     setTimeout(() => {
       window.open(
-        `https://wa.me/919025652123?text=${encodeURIComponent("I have registered from website and want to know more!")}`,
+        `https://wa.me/919791309739?text=${encodeURIComponent("I have registered from website and want to know more!")}`,
         "_blank",
       );
     }, 1800);
@@ -1527,7 +1527,7 @@ export default function App() {
             guaranteed.
           </p>
           <div className="hero-btns">
-            <a href="tel:+919025652123" className="btn-primary">
+            <a href="tel:+919791309739" className="btn-primary">
               📞 Call Now
             </a>
             <a href="#contact" className="btn-outline">
@@ -1602,10 +1602,10 @@ export default function App() {
                 <div className="lbl">Call to ask any question</div>
                 <div className="num">
                   <a
-                    href="tel:+919025652123"
+                    href="tel:+919791309739"
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
-                    +91 90256 52123
+                    +91 97913 09739
                   </a>
                 </div>
               </div>
@@ -1871,8 +1871,8 @@ export default function App() {
           </div>
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              display: "flex",
+              gridTemplateColumns: "column",
               gap: 32,
               marginTop: 50,
               maxWidth: 1000,
@@ -2008,18 +2008,18 @@ export default function App() {
                 Contact us today for a free evaluation and instant cash payment.
                 We come to your doorstep!
               </p>
-              <a href="tel:+919025652123" className="phone">
-                +91 90256 52123
+              <a href="tel:+919791309739" className="phone">
+                +91 97913 09739
               </a>
               <a
-                href="tel:+919025652123"
+                href="tel:+919791309739"
                 className="btn-primary"
                 style={{ display: "block", marginBottom: 12 }}
               >
                 📞 Call Now
               </a>
               <a
-                href="https://wa.me/919025652123"
+                href="https://wa.me/919791309739"
                 className="btn-outline"
                 style={{ display: "block", color: "#fff" }}
               >
@@ -2066,7 +2066,7 @@ export default function App() {
                 {
                   icon: "📞",
                   title: "Call Us",
-                  content: <a href="tel:+919025652123">+91 90256 52123</a>,
+                  content: <a href="tel:+919791309739">+91 97913 09739</a>,
                 },
                 {
                   icon: "✉️",
@@ -2082,8 +2082,7 @@ export default function App() {
                   title: "Head Office",
                   content: (
                     <p>
-                      No 155/4, Opposite Pothys, Cross Cut Rd, Erode, Tamil Nadu
-                      – 641012
+                      Planner Selvam park signal , CSI church opposite, erode -1
                     </p>
                   ),
                 },
@@ -2252,7 +2251,7 @@ export default function App() {
           <span>©2025 Sri Lakshmi Pattu Center. All Rights Reserved.</span>
           <div className="social-links">
             <a
-              href="https://wa.me/919025652123"
+              href="https://wa.me/919791309739"
               className="social-link"
               target="_blank"
               rel="noreferrer"
@@ -2260,7 +2259,7 @@ export default function App() {
             >
               💬
             </a>
-            <a href="tel:+919025652123" className="social-link" title="Call Us">
+            <a href="tel:+919791309739" className="social-link" title="Call Us">
               📞
             </a>
             <a
@@ -2333,7 +2332,7 @@ export default function App() {
       {/* FLOATING BUTTONS */}
       <div className="float-btns">
         <a
-          href="https://wa.me/919025652123"
+          href="https://wa.me/919791309739"
           className="float-btn float-wa"
           target="_blank"
           rel="noreferrer"
