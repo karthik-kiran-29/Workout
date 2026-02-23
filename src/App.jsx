@@ -2231,10 +2231,9 @@ export default function App() {
               ],
             },
             {
-              title: "Branches",
+              title: "Social Media",
               links: [
-                ["Erode", "#contact"],
-                ["Erode", "#contact"],
+                ["Instagarm", "https://www.instagram.com/_srilakshmipattucenter98?igsh=MTh6YXJreWpqZzRlMw=="],
               ],
             },
             {
@@ -2287,23 +2286,7 @@ export default function App() {
               ✉️
             </a>
             <a
-              href="https://www.facebook.com/YOUR_PAGE"
-              className="social-link"
-              target="_blank"
-              rel="noreferrer"
-              title="Facebook"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="currentColor"
-              >
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-              </svg>
-            </a>
-            <a
-              href="https://www.instagram.com/YOUR_HANDLE"
+              href="https://www.instagram.com/_srilakshmipattucenter98?igsh=MTh6YXJreWpqZzRlMw=="
               className="social-link"
               target="_blank"
               rel="noreferrer"
@@ -2322,26 +2305,7 @@ export default function App() {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
               </svg>
             </a>
-            <a
-              href="https://www.youtube.com/YOUR_CHANNEL"
-              className="social-link"
-              target="_blank"
-              rel="noreferrer"
-              title="YouTube"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                fill="currentColor"
-              >
-                <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-                <polygon
-                  points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"
-                  fill="white"
-                />
-              </svg>
-            </a>
+            
           </div>
         </div>
       </footer>
