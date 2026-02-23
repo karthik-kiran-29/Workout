@@ -1400,14 +1400,14 @@ export default function App() {
   const submit = (e) => {
     e.preventDefault();
     addData(form);
-    setForm({ name: "", phone: "", city: "", message: "" });
-    setShowPopup(true);
     setTimeout(() => {
       window.open(
-        `https://wa.me/919791309739?text=${encodeURIComponent("I have registered from website and want to know more!")}`,
+        `https://wa.me/919791309739?text=${encodeURIComponent(`I have registered from website and want to know more! My Name:${form.name}, My City:${form.city} and My Message is ${form.message}`)}`,
         "_blank",
       );
     }, 1800);
+    setForm({ name: "", phone: "", city: "", message: "" });
+    setShowPopup(true);
   };
   return (
     <>
