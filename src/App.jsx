@@ -85,7 +85,11 @@ nav {
   background: #fff; border: 1px solid #e8d8b8;
   border-top: 2px solid var(--gold); min-width: 230px;
   z-index: 300; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  max-width: calc(100vw - 20px);
+  overflow-x: hidden;
 }
+
+
 .dropdown a { padding: 10px 20px; font-size: 14px; border-bottom: 1px solid #f5ede0; font-weight: 400; }
 .dropdown a:hover { background: #fdf6ec; color: var(--gold); }
 .nav-cta {
@@ -149,6 +153,19 @@ nav {
   .hero-img-right img { mask-image: linear-gradient(to bottom, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%); }
   .hero { flex-direction: column; min-height: 100svh; }
   .hero-content { z-index: 2; }
+  .dropdown {
+  left: auto;
+  right: 0;
+  min-width: 200px;
+  max-width: calc(100vw - 16px);
+  font-size: 13px;
+}
+.dropdown a {
+  padding: 10px 14px;
+  font-size: 13px;
+  white-space: normal;
+  word-break: break-word;
+}
 }
 
 #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
