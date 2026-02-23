@@ -9,7 +9,7 @@ import sareeImg1 from "./assets/saree_img_1.jpg";
 import sareeImg2 from "./assets/saree_img_2.png";
 import sareeImg3 from "./assets/saree_img_3.png";
 import sareeImg4 from "./assets/saree_img_4.png";
-import sareeImg5 from "./assets/saree_img_5.jpg";
+import sareeImg5 from "./assets/saree_img_5.webp";
 import sareeImg6 from "./assets/saree_img_6.png";
 import sareeImg7 from "./assets/saree_img_7.png";
 import sareeImg8 from "./assets/saree_img_8.png";
