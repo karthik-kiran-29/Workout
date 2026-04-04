@@ -859,22 +859,86 @@ footer ul li a:hover { color: var(--gold); transform: translateX(6px); }
 
 /* ── DATA ── */
 const allProducts = [
-  { imgUrl: sareeImg1,  name: "Pattu Veshti",              desc: "Traditional Pattu Vethai sarees bought at best market rates." },
-  { imgUrl: sareeImg2,  name: "Pattu Blouse",              desc: "Authentic Pattu Blouse evaluated by silk experts." },
-  { imgUrl: sareeImg3,  name: "Pattu Thundu",              desc: "Fine Pattu Thundu pieces accepted in any condition." },
-  { imgUrl: sareeImg4,  name: "Pattu Salai",               desc: "Premium Pattu Salai weaves — instant cash offered." },
-  { imgUrl: sareeImg5,  name: "Pattu Pavadai",             desc: "Silk Pattu Pavadai and dresses purchased at fair value." },
-  { imgUrl: sareeImg6,  name: "Banarasi Silk",             desc: "Exquisite Banarasi weaves in any condition accepted." },
-  { imgUrl: sareeImg7,  name: "Mysore Silk",               desc: "Soft Mysore silk sarees purchased with fair valuation." },
-  { imgUrl: sareeImg8,  name: "Tissue Silk Sarees",        desc: "Delicate tissue sarees evaluated with expert care." },
-  { imgUrl: sareeImg9,  name: "Jacquard Silk Saree",       desc: "Intricate Jacquard silk designs — top prices paid." },
-  { imgUrl: sareeImg10, name: "Tanki / Jangla Silk Saree", desc: "Traditional Tanki and Jangla weaves expertly valued." },
-  { imgUrl: sareeImg11, name: "Padiyur Silk Sarees",       desc: "Authentic Padiyur silk sarees bought instantly." },
-  { imgUrl: sareeImg12, name: "Kanchipuram Pattu Saree",   desc: "Premium Kanchipuram silk with authentic zari work." },
-  { imgUrl: sareeImg13, name: "Jangala Banarasi Sarees",   desc: "Heritage Jangala Banarasi — we buy all types." },
-  { imgUrl: sareeImg14, name: "Thirli Onam Silk Sarees",   desc: "Festive Onam silk sarees accepted at premium rates." },
-  { imgUrl: sareeImg15, name: "Kavaring Silk Sarees",      desc: "Beautiful Kavaring silk sarees evaluated fairly." },
-  { imgUrl: sareeImg16, name: "Mixed Jarigai Silk Sarees", desc: "Mixed Jatiqui silk varieties — all types accepted." },
+  {
+    imgUrl: sareeImg1,
+    name: "Pattu Veshti",
+    desc: "Traditional Pattu Vethai sarees bought at best market rates.",
+  },
+  {
+    imgUrl: sareeImg2,
+    name: "Pattu Blouse",
+    desc: "Authentic Pattu Blouse evaluated by silk experts.",
+  },
+  {
+    imgUrl: sareeImg3,
+    name: "Pattu Thundu",
+    desc: "Fine Pattu Thundu pieces accepted in any condition.",
+  },
+  {
+    imgUrl: sareeImg4,
+    name: "Pattu Salai",
+    desc: "Premium Pattu Salai weaves — instant cash offered.",
+  },
+  {
+    imgUrl: sareeImg5,
+    name: "Pattu Pavadai",
+    desc: "Silk Pattu Pavadai and dresses purchased at fair value.",
+  },
+  {
+    imgUrl: sareeImg6,
+    name: "Banarasi Silk",
+    desc: "Exquisite Banarasi weaves in any condition accepted.",
+  },
+  {
+    imgUrl: sareeImg7,
+    name: "Mysore Silk",
+    desc: "Soft Mysore silk sarees purchased with fair valuation.",
+  },
+  {
+    imgUrl: sareeImg8,
+    name: "Tissue Silk Sarees",
+    desc: "Delicate tissue sarees evaluated with expert care.",
+  },
+  {
+    imgUrl: sareeImg9,
+    name: "Jacquard Silk Saree",
+    desc: "Intricate Jacquard silk designs — top prices paid.",
+  },
+  {
+    imgUrl: sareeImg10,
+    name: "Tanki / Jangla Silk Saree",
+    desc: "Traditional Tanki and Jangla weaves expertly valued.",
+  },
+  {
+    imgUrl: sareeImg11,
+    name: "Padiyur Silk Sarees",
+    desc: "Authentic Padiyur silk sarees bought instantly.",
+  },
+  {
+    imgUrl: sareeImg12,
+    name: "Kanchipuram Pattu Saree",
+    desc: "Premium Kanchipuram silk with authentic zari work.",
+  },
+  {
+    imgUrl: sareeImg13,
+    name: "Jangala Banarasi Sarees",
+    desc: "Heritage Jangala Banarasi — we buy all types.",
+  },
+  {
+    imgUrl: sareeImg14,
+    name: "Thirli Onam Silk Sarees",
+    desc: "Festive Onam silk sarees accepted at premium rates.",
+  },
+  {
+    imgUrl: sareeImg15,
+    name: "Kavaring Silk Sarees",
+    desc: "Beautiful Kavaring silk sarees evaluated fairly.",
+  },
+  {
+    imgUrl: sareeImg16,
+    name: "Mixed Jarigai Silk Sarees",
+    desc: "Mixed Jatiqui silk varieties — all types accepted.",
+  },
 ];
 
 const INITIAL_SHOW = 6;
@@ -1264,7 +1328,9 @@ function MobileNav({ open, onClose }) {
 
 function ProductsSection() {
   const [expanded, setExpanded] = useState(false);
-  const visibleProducts = expanded ? allProducts : allProducts.slice(0, INITIAL_SHOW);
+  const visibleProducts = expanded
+    ? allProducts
+    : allProducts.slice(0, INITIAL_SHOW);
   const remaining = allProducts.length - INITIAL_SHOW;
 
   return (
@@ -1272,9 +1338,15 @@ function ProductsSection() {
       <div className="max-w">
         <div className="reveal" style={{ textAlign: "center" }}>
           <div className="section-label">Our Buying Products</div>
-          <h2 className="section-title">Browse Our <em>16 Saree Categories</em></h2>
-          <p className="section-sub" style={{ margin: "12px auto 0", textAlign: "center" }}>
-            We buy all types of old silk sarees — from everyday weaves to rare heirloom pieces.
+          <h2 className="section-title">
+            Browse Our <em>16 Saree Categories</em>
+          </h2>
+          <p
+            className="section-sub"
+            style={{ margin: "12px auto 0", textAlign: "center" }}
+          >
+            We buy all types of old silk sarees — from everyday weaves to rare
+            heirloom pieces.
           </p>
         </div>
 
@@ -1286,11 +1358,13 @@ function ProductsSection() {
         </div>
 
         {/* REMAINING — expand/collapse */}
-        <div style={{
-          maxHeight: expanded ? 2000 : 0,
-          overflow: "hidden",
-          transition: "max-height 0.8s cubic-bezier(0.25,0.8,0.25,1)"
-        }}>
+        <div
+          style={{
+            maxHeight: expanded ? 2000 : 0,
+            overflow: "hidden",
+            transition: "max-height 0.8s cubic-bezier(0.25,0.8,0.25,1)",
+          }}
+        >
           <div className="products-grid" style={{ marginTop: 28 }}>
             {allProducts.slice(INITIAL_SHOW).map((p, i) => (
               <ProductCard key={i + INITIAL_SHOW} p={p} i={i} />
@@ -1304,20 +1378,38 @@ function ProductsSection() {
             onClick={() => setExpanded(!expanded)}
             className="btn-primary"
             style={{
-              border: "none", cursor: "pointer", marginRight: 16,
-              display: "inline-flex", alignItems: "center", gap: 10,
-              fontSize: 15, padding: "14px 32px"
+              border: "none",
+              cursor: "pointer",
+              marginRight: 16,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              fontSize: 15,
+              padding: "14px 32px",
             }}
           >
-            <span style={{
-              display: "inline-block",
-              transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.4s ease", fontSize: 18, lineHeight: 1
-            }}>▼</span>
+            <span
+              style={{
+                display: "inline-block",
+                transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.4s ease",
+                fontSize: 18,
+                lineHeight: 1,
+              }}
+            >
+              ▼
+            </span>
             {expanded ? `Show Less` : `Show ${remaining} More Categories`}
           </button>
-          <a href="#contact" className="btn-outline"
-            style={{ color: "var(--deep)", borderColor: "var(--gold)", display: "inline-block" }}>
+          <a
+            href="#contact"
+            className="btn-outline"
+            style={{
+              color: "var(--deep)",
+              borderColor: "var(--gold)",
+              display: "inline-block",
+            }}
+          >
             Sell All Types →
           </a>
         </div>
@@ -1330,33 +1422,72 @@ function ProductCard({ p, i }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="product-card reveal" style={{ transitionDelay: `${(i % 3) * 0.1}s` }}>
-      <div className="product-card-img" style={{ position: "relative", overflow: "hidden" }}>
+    <div
+      className="product-card reveal"
+      style={{ transitionDelay: `${(i % 3) * 0.1}s` }}
+    >
+      <div
+        className="product-card-img"
+        style={{ position: "relative", overflow: "hidden" }}
+      >
         {p.imgUrl && !imgError ? (
           <img
             src={p.imgUrl}
             alt={p.name}
             onError={() => setImgError(true)}
-            style={{ height: "100%", width: "100%", objectFit: "cover", borderRadius: "12px 12px 0 0" }}
+            style={{
+              height: "100%",
+              width: "100%",
+              objectFit: "cover",
+              borderRadius: "12px 12px 0 0",
+            }}
           />
         ) : (
-          <div style={{
-            width: "100%", height: "100%",
-            background: "linear-gradient(135deg, #1a0800 0%, #3d1a00 50%, #6b3010 100%)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <span style={{ fontSize: 13, color: "rgba(200,146,42,0.7)", letterSpacing: 1 }}>No Image</span>
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              background:
+                "linear-gradient(135deg, #1a0800 0%, #3d1a00 50%, #6b3010 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <span
+              style={{
+                fontSize: 13,
+                color: "rgba(200,146,42,0.7)",
+                letterSpacing: 1,
+              }}
+            >
+              No Image
+            </span>
           </div>
         )}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to top, rgba(26,8,0,0.65) 0%, transparent 55%)",
-          pointerEvents: "none", borderRadius: "12px 12px 0 0"
-        }} />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(26,8,0,0.65) 0%, transparent 55%)",
+            pointerEvents: "none",
+            borderRadius: "12px 12px 0 0",
+          }}
+        />
       </div>
       <div className="product-card-body">
         <h3>{p.name}</h3>
-        <p style={{ fontSize: 13, color: "#6a5540", marginBottom: 10, lineHeight: 1.5 }}>{p.desc}</p>
+        <p
+          style={{
+            fontSize: 13,
+            color: "#6a5540",
+            marginBottom: 10,
+            lineHeight: 1.5,
+          }}
+        >
+          {p.desc}
+        </p>
         <a href="#contact">Sell Now →</a>
       </div>
     </div>
@@ -1451,7 +1582,36 @@ export default function App() {
             <a href="#products">Products ▾</a>
             <div className="dropdown">
               {products.map((p, i) => (
-                <a key={i} href="#products">
+                <a
+                  key={i}
+                  href="#products"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const productsSection = document.getElementById("products");
+                    if (productsSection) {
+                      productsSection.scrollIntoView({ behavior: "smooth" });
+                      // Small delay to ensure section is visible, then highlight the product
+                      setTimeout(() => {
+                        const productCards =
+                          document.querySelectorAll(".product-card");
+                        if (productCards[i]) {
+                          productCards[i].scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                          });
+                          // Optional: Add a temporary highlight effect
+                          productCards[i].style.transform = "scale(1.05)";
+                          productCards[i].style.boxShadow =
+                            "0 0 30px rgba(200,146,42,0.6)";
+                          setTimeout(() => {
+                            productCards[i].style.transform = "";
+                            productCards[i].style.boxShadow = "";
+                          }, 1500);
+                        }
+                      }, 300);
+                    }
+                  }}
+                >
                   {p.name}
                 </a>
               ))}
@@ -1903,7 +2063,16 @@ export default function App() {
                 className="branch-card-full reveal"
                 style={{ transitionDelay: `${i * 0.15}s` }}
               >
-                <div style={{borderTop:`4px solid ${b.color}`,background:'rgba(255,255,255,0.05)',borderRadius:12,padding:'clamp(20px, 4vw, 32px) clamp(16px, 3vw, 28px)',border:'1px solid rgba(200,146,42,0.25)',backdropFilter:'blur(4px)'}}>
+                <div
+                  style={{
+                    borderTop: `4px solid ${b.color}`,
+                    background: "rgba(255,255,255,0.05)",
+                    borderRadius: 12,
+                    padding: "clamp(20px, 4vw, 32px) clamp(16px, 3vw, 28px)",
+                    border: "1px solid rgba(200,146,42,0.25)",
+                    backdropFilter: "blur(4px)",
+                  }}
+                >
                   <div style={{ fontSize: 36, marginBottom: 12 }}>🏪</div>
                   <h3
                     style={{
@@ -1944,7 +2113,9 @@ export default function App() {
                   >
                     <iframe
                       src={b.mapEmbed}
-                      width="100%" height="220" style={{border:0,display:'block',minHeight:180}}
+                      width="100%"
+                      height="220"
+                      style={{ border: 0, display: "block", minHeight: 180 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
@@ -2099,7 +2270,8 @@ export default function App() {
                   title: "Head Office",
                   content: (
                     <p>
-                      Panneerselvam park signal, csi church opposite,Erode-638001
+                      Panneerselvam park signal, csi church
+                      opposite,Erode-638001
                     </p>
                   ),
                 },
@@ -2233,7 +2405,10 @@ export default function App() {
             {
               title: "Social Media",
               links: [
-                ["Instagarm", "https://www.instagram.com/_srilakshmipattucenter98?igsh=MTh6YXJreWpqZzRlMw=="],
+                [
+                  "Instagarm",
+                  "https://www.instagram.com/_srilakshmipattucenter98?igsh=MTh6YXJreWpqZzRlMw==",
+                ],
               ],
             },
             {
@@ -2305,7 +2480,6 @@ export default function App() {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
               </svg>
             </a>
-            
           </div>
         </div>
       </footer>
